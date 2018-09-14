@@ -10,7 +10,7 @@ import firebase_admin
 from firebase_admin import credentials, db
 
 
-from parse_ import Typhoon, Earthquake
+from parse_ import Typhoon, Earthquake, debrisFlow
 from utils import tformat, splitLine
 ##### configure #####
 app = Flask(__name__)
@@ -26,7 +26,8 @@ root = db.reference()
 
 parseCase = {
 	'颱風': Typhoon,
-	'地震': Earthquake
+	'地震': Earthquake,
+	'土石流': debrisFlow
 	}
 
 ##### flask http request #####
@@ -50,7 +51,10 @@ def index():
 		try:
 			data = xmltodict.parse(data)
 			idf = data['alert']['identifier']
-			category = data['alert']['info']['event']
+			if type(data['alert']['info']) == list:
+				category = data['alert']['info'][0]['event']
+			else:
+				category = data['alert']['info']['event']
 			bot.sendDocument(owner, (f'{category}.xml', f))
 		except Exception as e:
 			logging.exception("xmltodict parse error")
