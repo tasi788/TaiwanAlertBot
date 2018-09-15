@@ -3,15 +3,17 @@ import logging
 import requests
 import xmltodict
 import unicodedata
+import re
 from time import strftime
 from utils import tformat
+from configparser import SafeConfigParser
 
 from pprint import pprint as pp
 
 config = SafeConfigParser()
 config.read('config.txt')
 bot = telepot.Bot(config.get('bot', 'token'))
-chatIdList = config.get('channel', 'typhoon').split(',')
+chatIdList = config.get('channel', 'thunderstorm').split(',')
 owner = int(config.get('owner', 'id'))
 
 def parse(content):
@@ -51,16 +53,20 @@ def msgfromat(parse_):
 	headline = parse_['headline']
 	#警報簡述
 	desc = unicodedata.normalize('NFKC', parse_['description'])
+	# desc = re.sub(r"([0-9]+)( *年)","2018"+r"\2",desc)
+	desc =  re.sub(r"([0-9]+) *年 *", "",desc)
 	if type(parse_['parameter']) == list:
 		for x in parse_['parameter']:
 			# 警報顏色
 			if x['valueName'] == 'alert_color':
 				alertColor = {'橙色': '🔶 #橙色','黃色': '⭐ #黃色','紅色': '🔴 #紅色','綠色': '💚 #綠色'}[x['value']]
 			# 嚴重程度
-			elif x['valueName'] == 'severity_level':
-				securityLevel = x['value']
+			# 暴雨資料沒有嚴重程度
+			# 將 {securityLevel} 刪除
+			# elif x['valueName'] == 'severity_level':
+			# 	securityLevel = x['value']
 	else:
-		securityLevel, alertColor = '', ''
+		alertColor = ''
 
 	if type(parse_['area']) == list:
 		area = ''
@@ -71,13 +77,13 @@ def msgfromat(parse_):
 
 	msg = f'發布單位：#{senderName}\n' \
 		f'警報類型：#{headline}\n' \
-		f'警戒等級：{alertColor} #{securityLevel}\n' \
+		f'警戒等級：{alertColor} #豪雨\n' \
 		f'警報簡述：{desc}\n' \
 		'\n' \
 		f'影響區域：\n{area}\n' \
 		'\n' \
 		'*備註*\n' \
-		f'相關詳細強降雨警報請上<a href="https://www.cwb.gov.tw/V7/prevent/warning.htm">氣象局網站</a>\n' \
+		f'相關詳細強降雨警報請上 <a href="https://www.cwb.gov.tw/V7/prevent/warning.htm">氣象局網站</a>\n' \
 		'\n' \
 		f'警報發布時間：{effective}\n'
 
