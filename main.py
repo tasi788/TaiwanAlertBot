@@ -10,7 +10,7 @@ import firebase_admin
 from firebase_admin import credentials, db
 
 
-from parse_ import Typhoon, Earthquake, debrisFlow
+from parse_ import Typhoon, Earthquake, debrisFlow, thunderstorm
 from utils import tformat, splitLine
 ##### configure #####
 app = Flask(__name__)
@@ -27,7 +27,8 @@ root = db.reference()
 parseCase = {
 	'颱風': Typhoon,
 	'地震': Earthquake,
-	'土石流': debrisFlow
+	'土石流': debrisFlow,
+	'雷雨': thunderstorm
 	}
 
 ##### flask http request #####
