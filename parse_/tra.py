@@ -9,7 +9,7 @@ from configparser import SafeConfigParser
 config = SafeConfigParser()
 config.read('config.txt')
 bot = telepot.Bot(config.get('bot', 'token'))
-chatIdList = config.get('channel', 'thunderstorm').split(',')
+chatIdList = config.get('channel', 'rail').split(',')
 owner = int(config.get('owner', 'id'))
 
 
@@ -82,9 +82,8 @@ def msgfromat(parse_):
 	for chatId in chatIdList:
 		while True:
 			try:
-				print(msg)
-				#bot.sendMessage(
-				#	int(chatId), msg, parse_mode='html', disable_web_page_preview=True)
+				bot.sendMessage(
+					int(chatId), msg, parse_mode='html', disable_web_page_preview=True)
 				break
 			except Exception as e:
 				logging.exception(e)

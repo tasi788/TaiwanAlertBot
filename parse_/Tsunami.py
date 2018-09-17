@@ -4,14 +4,14 @@ import requests
 import xmltodict
 import unicodedata
 from utils import tformat
-
 from pprint import pprint as pp
+from configparser import SafeConfigParser
 
 
 config = SafeConfigParser()
 config.read('config.txt')
 bot = telepot.Bot(config.get('bot', 'token'))
-chatIdList = config.get('channel', 'earthquake').split(',')
+chatIdList = config.get('channel', 'Tsunami').split(',')
 owner = int(config.get('owner', 'id'))
 
 

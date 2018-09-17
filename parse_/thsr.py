@@ -4,16 +4,16 @@ import requests
 import xmltodict
 from utils import tformat
 from pprint import pprint as pp
-
+from configparser import SafeConfigParser
 
 config = SafeConfigParser()
 config.read('config.txt')
 bot = telepot.Bot(config.get('bot', 'token'))
-chatIdList = config.get('channel', 'earthquake').split(',')
+chatIdList = config.get('channel', 'rail').split(',')
 owner = int(config.get('owner', 'id'))
 
 
-def parse(self):
+def parse(content):
 	parse = content['alert']['info']
 	id = content['alert']['identifier']
 	status = content['alert']['status']
@@ -29,7 +29,7 @@ def parse(self):
 			msgfromat(parse)
 
 
-def msgfromat(self, parse_):
+def msgfromat(parse_):
 	'''
 	發布單位：#台灣高速鐵路股份有限公司
 	警報類型：#鐵路事故 {event}

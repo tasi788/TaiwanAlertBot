@@ -1,4 +1,4 @@
-import tra, thsr
+from parse_ import tra, thsr
 
 def parse(content):
 	'''
