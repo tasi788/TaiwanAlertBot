@@ -21,7 +21,7 @@ def parse(content):
 	parse = content['alert']['info']
 	id = content['alert']['identifier']
 	status = content['alert']['status']
-	nowY = strftime('%Y')
+
 
 	if status.lower() != 'actual':
 		logging.warning(f'{id} 颱風測試檔案')
@@ -75,6 +75,7 @@ def msgfromat(parse_):
 
 	警報解除發布時間：2018年8月27日 8:30 AM
 	'''
+	nowY = strftime('%Y')
 	effective = tformat(parse_['effective'])
 	senderName = parse_['senderName']
 	category = parse_['event']

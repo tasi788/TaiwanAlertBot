@@ -1,3 +1,4 @@
+import io
 import telepot
 import logging
 import requests
@@ -18,7 +19,6 @@ def parse(content):
 	parse = content['alert']['info']
 	id = content['alert']['identifier']
 	status = content['alert']['status']
-	nowY = strftime('%Y')
 
 	if status.lower() != 'actual':
 		logging.warning(f'{id} 地震測試檔案')
@@ -82,10 +82,12 @@ def msgfromat(parse_):
 			pic = pics['uri']
 			pic_ = requests.get(pic.replace('.gif', '_H.png'), stream=True)
 			if pic_.status_code == 200:
-				with open('earthquake.png', 'wb') as fd:
-					for chunk in pic_.iter_content(chunk_size=128):
-						fd.write(chunk)
-				pic = open('earthquake.png', 'rb')
+				pic_.decode_content = True
+				pic = io.BytesIO(pic_.content)
+				#with open('earthquake.png', 'wb') as fd:
+				#	for chunk in pic_.iter_content(chunk_size=128):
+				#		fd.write(chunk)
+				#pic = open('earthquake.png', 'rb')
 	msg = f'發布單位：#{senderName}\n' \
 		f'地震資料來源：{eventpublisher}\n' \
 		f'警報類型：#{category}\n' \

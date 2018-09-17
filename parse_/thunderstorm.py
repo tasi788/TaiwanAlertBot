@@ -21,7 +21,7 @@ def parse(content):
 	parse = content['alert']['info']
 	id = content['alert']['identifier']
 	status = content['alert']['status']
-	nowY = strftime('%Y')
+
 	if status.lower() != 'actual':
 		logging.warning(f'{id} 雷雨測試檔案')
 		return
@@ -87,9 +87,8 @@ def msgfromat(parse_):
 	for chatId in chatIdList:
 		while True:
 			try:
-				print(msg)
-				#bot.sendMessage(
-				#	int(chatId), msg, parse_mode='html', disable_web_page_preview=True)
+				bot.sendMessage(
+					int(chatId), msg, parse_mode='html', disable_web_page_preview=True)
 				break
 			except Exception as e:
 				logging.exception(e)
