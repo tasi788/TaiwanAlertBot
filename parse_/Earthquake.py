@@ -5,15 +5,16 @@ import requests
 import xmltodict
 from time import strftime
 from utils import tformat
+from pprint import pprint as pp
 from configparser import SafeConfigParser
 
-from pprint import pprint as pp
 
 config = SafeConfigParser()
 config.read('config.txt')
 bot = telepot.Bot(config.get('bot', 'token'))
 chatIdList = config.get('channel', 'earthquake').split(',')
 owner = int(config.get('owner', 'id'))
+
 
 def parse(content):
 	parse = content['alert']['info']
@@ -30,6 +31,7 @@ def parse(content):
 		else:
 			msgfromat(parse)
 
+
 def msgfromat(parse_):
 	'''
 	發布單位：#中央氣象局
@@ -40,9 +42,9 @@ def msgfromat(parse_):
 	警報簡述：09/03 13:59花蓮縣秀林鄉發生規模4.3有感地震，最大震度花蓮縣銅門5級。
 
 	各地最大震度：
-		5級 花蓮縣
-		3級 南投縣
-		3級 臺中市
+			5級 花蓮縣
+			3級 南投縣
+			3級 臺中市
 
 	*備註*
 	相關詳細地震資訊請上[地震測報中心](https://scweb.cwb.gov.tw/GraphicContent.aspx?ItemId=49&fileString=2018090313594943117)
@@ -53,15 +55,15 @@ def msgfromat(parse_):
 	senderName = parse_['senderName']
 	category = parse_['event']
 	quakelocationlevel = ''
-	#地震簡述
+	# 地震簡述
 	desc = parse_['description']
-	#網站
+	# 網站
 	site = parse_['web']
-	#各地最大震度
+	# 各地最大震度
 	for y in parse_['area']:
 		if 'circle' in y:
 			area = y['areaDesc']
-	#地震地點 地震強度 各地最大震度
+	# 地震地點 地震強度 各地最大震度
 	for x in parse_['parameter']:
 		if x['valueName'] == 'EventLocationName':
 			eventLocation = x['value']
@@ -76,7 +78,7 @@ def msgfromat(parse_):
 			depth = x['value']
 		elif x['valueName'] == 'EventPublisher':
 			eventpublisher = x['value']
-	#圖
+	# 圖
 	for pics in parse_['resource']:
 		if pics['resourceDesc'] == '地震報告圖':
 			pic = pics['uri']
@@ -84,7 +86,7 @@ def msgfromat(parse_):
 			if pic_.status_code == 200:
 				pic_.decode_content = True
 				pic = io.BytesIO(pic_.content)
-				#with open('earthquake.png', 'wb') as fd:
+				# with open('earthquake.png', 'wb') as fd:
 				#	for chunk in pic_.iter_content(chunk_size=128):
 				#		fd.write(chunk)
 				#pic = open('earthquake.png', 'rb')

@@ -1,14 +1,14 @@
+import re
 import telepot
 import logging
 import requests
 import xmltodict
 import unicodedata
-import re
 from time import strftime
 from utils import tformat
+from pprint import pprint as pp
 from configparser import SafeConfigParser
 
-from pprint import pprint as pp
 
 config = SafeConfigParser()
 config.read('config.txt')
@@ -41,8 +41,8 @@ def msgfromat(parse_):
 	警報簡述：午後對流發展旺盛，今（２）日屏東地區及嘉義、高雄山區有局部大雨或豪雨發生的機率，其他各地山區有局部大雨發生的機率，請注意瞬間大雨、雷擊及強陣風。 {desc}
 
 	影響區域：
-					屏東縣新埤鄉 {area}
-					屏東縣竹田鄉
+																	屏東縣新埤鄉 {area}
+																	屏東縣竹田鄉
 
 	*備註*
 	相關詳細強降雨警報請上[氣象局網站](https://www.cwb.gov.tw/V7/prevent/warning.htm)
@@ -62,7 +62,7 @@ def msgfromat(parse_):
 			# 警報顏色
 			if x['valueName'] == 'alert_color':
 				alertColor = {'橙色': '🔶 #橙色', '黃色': '⭐ #黃色',
-							'紅色': '🔴 #紅色', '綠色': '💚 #綠色'}[x['value']]
+							  '紅色': '🔴 #紅色', '綠色': '💚 #綠色'}[x['value']]
 	else:
 		alertColor = ''
 	if type(parse_['area']) == list:
