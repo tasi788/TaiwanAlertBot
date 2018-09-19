@@ -30,7 +30,7 @@
 - [x] [水庫放流(水利署)](https://t.me/Taiwan_Reservoir)
 
 ##### 交通
-- [ ] [道路封閉(公路總局)](https://t.me/Taiwan_Road)
+- [x] [道路封閉(公路總局)](https://t.me/Taiwan_Road)
 - [x] [鐵路事故(台灣高速鐵路股份有限公司)](https://t.me/Taiwan_Rail)
 - [x] [鐵路事故(臺灣鐵路管理局)](https://t.me/Taiwan_Rail)
 
@@ -43,8 +43,8 @@
 - [ ] 開放路邊停車(台北市政府)
 
 ##### 國家通訊傳播委員會
-- [ ] [市話通訊中斷(國家通訊傳播委員會)](https://t.me/Taiwan_NCC)
-- [ ] [行動電話中斷(國家通訊傳播委員會)](https://t.me/Taiwan_NCC)
+- [x] [市話通訊中斷(國家通訊傳播委員會)](https://t.me/Taiwan_NCC)
+- [x] [行動電話中斷(國家通訊傳播委員會)](https://t.me/Taiwan_NCC)
 
 ##### 疾病管制署
 - [ ] 傳染病(疾病管制署)
@@ -52,6 +52,6 @@
 
 ##### 其他
 - [x] [土石流(水土保持局)](https://t.me/Taiwan_debrisFlow)
-- [ ] [停班停課(人事行政總處)](https://t.me/Taiwan_QK)
+- [x] [停班停課(人事行政總處)](https://t.me/Taiwan_QK)
 - [ ] 防空(民防指揮管制所)
 - [ ] 空氣品質下降(環境保護署)
