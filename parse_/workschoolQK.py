@@ -78,9 +78,8 @@ def msgfromat(parse_):
 	for chatId in chatIdList:
 		while True:
 			try:
-				print(msg)
-				#bot.sendMessage(
-				#	int(chatId), msg, parse_mode='html', disable_web_page_preview=True)
+				bot.sendMessage(
+					int(chatId), msg, parse_mode='html', disable_web_page_preview=True)
 				break
 			except Exception as e:
 				logging.exception(e)
