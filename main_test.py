@@ -1,8 +1,8 @@
 import requests
 import xmltodict
-from parse_ import thunderstorm
+from parse_ import workschoolQK
 
-url = 'https://alerts.ncdr.nat.gov.tw/RssAtomFeed.ashx?AlertType=1051'
+url = 'https://alerts.ncdr.nat.gov.tw/RssAtomFeed.ashx?AlertType=33'
 
 def fetch(url):
 	r = requests.get(url)
@@ -20,4 +20,7 @@ data = fetch(url)
 parse = data['feed']['entry']
 for parse_ in parse:
 	content = fetch(parse_['link']['@href'])
-	thunderstorm.parse(content)
+	try:
+		workschoolQK.parse(content)
+	except:
+		print(parse_['link']['@href'])
