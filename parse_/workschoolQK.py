@@ -54,8 +54,7 @@ def msgfromat(parse_):
 	# 警報類型
 	headline = parse_['event']
 	# 警報簡述
-	desc = unicodedata.normalize('NFKC', parse_['description']).split(']', 1)[
-		1].replace(':', ' ').replace('。', '\n')
+	desc = unicodedata.normalize('NFKC', parse_['description']).split(']', 1)[1].replace('。', '\n')
 	instru = parse_['instruction'].replace('\n', '')
 	if type(parse_['parameter']) == list:
 		for x in parse_['parameter']:
@@ -79,8 +78,9 @@ def msgfromat(parse_):
 	for chatId in chatIdList:
 		while True:
 			try:
-				bot.sendMessage(
-					int(chatId), msg, parse_mode='html', disable_web_page_preview=True)
+				print(msg)
+				#bot.sendMessage(
+				#	int(chatId), msg, parse_mode='html', disable_web_page_preview=True)
 				break
 			except Exception as e:
 				logging.exception(e)
