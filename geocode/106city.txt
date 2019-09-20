@@ -1,0 +1,22 @@
+09007	Lienchiang County	福建省連江縣	連江縣
+09020	Kinmen County	福建省金門縣	金門縣
+10002	Yilan County	臺灣省宜蘭縣	宜蘭縣
+10007	Changhua County	臺灣省彰化縣	彰化縣
+10008	Nantou County	臺灣省南投縣	南投縣
+10009	Yunlin County	臺灣省雲林縣	雲林縣
+10013	Pingtung County	臺灣省屏東縣	屏東縣
+10014	Taitung County	臺灣省臺東縣	臺東縣
+10015	Hualien County	臺灣省花蓮縣	花蓮縣
+10016	Penghu County	臺灣省澎湖縣	澎湖縣
+10017	Keelung City	臺灣省基隆市	基隆市
+10018	Hsinchu City	臺灣省新竹市	新竹市
+63	Taipei City	臺北市	臺北市
+65	New Taipei City	新北市	新北市
+66	Taichung City	臺中市	臺中市
+67	Tainan City	臺南市	臺南市
+68	Taoyuan City	桃園市	桃園市
+10005	Miaoli County	臺灣省苗栗縣	苗栗縣
+10004	Hsinchu County	臺灣省新竹縣	新竹縣
+10020	Chiayi City	臺灣省嘉義市	嘉義市
+10010	Chiayi County	臺灣省嘉義縣	嘉義縣
+64	Kaohsiung City	高雄市	高雄市
