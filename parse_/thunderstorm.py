@@ -56,7 +56,7 @@ def msgfromat(parse_):
 	# 警報簡述
 	desc = unicodedata.normalize('NFKC', parse_['description'])
 	#desc = re.sub(r"([0-9]+)( *年)","2018"+r"\2",d)
-	desc = re.sub(r"^([0-9]{3}) *年 *", "", desc)
+	#desc = re.sub(r"^([0-9]{3}) *年 *", "", desc)
 	if type(parse_['parameter']) == list:
 		for x in parse_['parameter']:
 			# 警報顏色
