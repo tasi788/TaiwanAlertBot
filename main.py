@@ -10,7 +10,7 @@ import firebase_admin
 from firebase_admin import credentials, db
 
 
-from parse_ import Typhoon, Earthquake, debrisFlow, thunderstorm
+from parse_ import Typhoon, Earthquake, debrisFlow, thunderstorm, railTransport, Tsunami, extremelyRain, ReservoirDis, bobe168, phone, workschoolQK
 from utils import tformat, splitLine
 ##### configure #####
 app = Flask(__name__)
@@ -28,7 +28,15 @@ parseCase = {
 	'颱風': Typhoon,
 	'地震': Earthquake,
 	'土石流': debrisFlow,
-	'雷雨': thunderstorm
+	'雷雨': thunderstorm,
+	'鐵路事故': railTransport,
+	'海嘯': Tsunami,
+	'降雨': extremelyRain,
+	'水庫放流': ReservoirDis,
+	'道路封閉': bobe168,
+	'市話通訊中斷': phone,
+	'行動電話中斷': phone,
+	'停班停課': workschoolQK
 	}
 
 ##### flask http request #####
@@ -61,8 +69,11 @@ def index():
 			logging.exception("xmltodict parse error")
 			bot.sendMessage(owner, f'{idf}\n{str(e)}')
 			return resp
-		if category in parseCase.keys():
-			parseCase[category].parse(data)
+		try:
+			if category in parseCase.keys():
+				parseCase[category].parse(data)
+		except Exception as e:
+			bot.sendMessage(owner, '{e}'.format(str(e)))
 		return resp
 
 	return jsonify({'status': 'dafuq'})
