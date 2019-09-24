@@ -1,5 +1,0 @@
-cron:
-#- description: "RSS Check"
-#  url: /typhoon
-#  schedule: every 10 minutes
-#  timezone: Asia/Taipei
