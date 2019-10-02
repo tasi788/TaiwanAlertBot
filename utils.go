@@ -6,22 +6,27 @@ import (
 
 // Color process hex color to string
 func Color(color string) string {
-	switch strings.Contains(color, "#") {
+	tmp := ""
+
+	switch strings.Contains(color, "#") == true {
 	case color == "#EE9200":
-		return "🔶 #橙色"
+		tmp = "🔶 #橙色"
 	case color == "#3300FF":
-		return "🔵 #藍色"
+		tmp = "🔵 #藍色"
 	default:
-		return "#無色"
+		//tmp = "#無色"
+		mapping := map[string]string{
+			"藍色": "🔵",
+			"橙色": "🔶",
+			"紅色": "🔴",
+			"黑色": "⚫",
+			"黃色": "⭐",
+			"綠色": "💚",
+			"紫色": "😈",
+		}
+		tmp = mapping[color] + " #" + color
+
 	}
-	mapping := map[string]string{
-		"藍色": "🔵",
-		"橙色": "🔶",
-		"紅色": "🔴",
-		"黑色": "⚫",
-		"黃色": "💛",
-	}
-	tmp := "#" + color + mapping[color]
 	return tmp
 
 }
