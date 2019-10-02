@@ -34,17 +34,6 @@ type Info struct {
 	Parameter   []Parameter `xml:"parameter"`
 }
 
-// TyphoonInfo 用ㄉ
-type TyphoonInfo struct {
-	Description string     `xml:"description"`
-	Section     []Sections `xml:"section"`
-}
-
-type Sections struct {
-	Key   string `xml:"title,attr"`
-	Value string `xml:",chardata"`
-}
-
 type Parameter struct {
 	XMLName   xml.Name `xml:"parameter"`
 	ValueName string   `xml:"valueName"`
