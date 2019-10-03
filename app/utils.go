@@ -7,14 +7,14 @@ import (
 // Color process hex color to string
 func Color(color string) string {
 	tmp := ""
-
-	switch strings.Contains(color, "#") == true {
-	case color == "#EE9200":
-		tmp = "🔶 #橙色"
-	case color == "#3300FF":
-		tmp = "🔵 #藍色"
-	default:
-		//tmp = "#無色"
+	if strings.Contains(color, "#") == true {
+		if color == "#EE9200" {
+			tmp = "🔶 #000000橙色"
+		}
+		if color == "#3300FF" {
+			tmp = "🔵 #藍色"
+		}
+	} else {
 		mapping := map[string]string{
 			"藍色": "🔵",
 			"橙色": "🔶",
@@ -25,7 +25,6 @@ func Color(color string) string {
 			"紫色": "😈",
 		}
 		tmp = mapping[color] + " #" + color
-
 	}
 	return tmp
 
