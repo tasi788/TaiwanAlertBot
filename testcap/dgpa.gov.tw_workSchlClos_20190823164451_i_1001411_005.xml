@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<alert xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>dgpa.gov.tw_workSchlClos_20190823164451_i_1001411_005</identifier>
+  <sender>http://www.dgpa.gov.tw</sender>
+  <sent>2019-08-23T16:44:51+08:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <info>
+    <language>zh-TW</language>
+    <category>Infra</category>
+    <event>停班停課</event>
+    <urgency>Immediate</urgency>
+    <severity>Extreme</severity>
+    <certainty>Observed</certainty>
+    <eventCode>
+      <valueName>profile:CAP-TWP:Event:1.0</valueName>
+      <value>workSchlClos</value>
+    </eventCode>
+    <effective>2019-08-23T16:40:00+08:00</effective>
+    <expires>2019-08-23T23:59:59+08:00</expires>
+    <senderName>行政院人事行政總處</senderName>
+    <headline>停班課通知</headline>
+    <description>[停班停課通知]臺東縣綠島鄉:今天晚上停止上班、停止上課。行政院人事行政總處。如有任何問題請撥1999(縣內直撥)。</description>
+    <instruction>適用範圍為各級政府機關及公、私立學校；
+至交通運輸、警察、消防、海岸巡防、醫療、關務等業務性質特殊機關（構），為全年無休服務民眾，
+且應實施輪班、輪休制度，如遇天然災害發生時，其尚無停止上班之適用。</instruction>
+    <web>http://www.dgpa.gov.tw</web>
+    <parameter>
+      <valueName>alert_title</valueName>
+      <value>天然災害停止上班及上課情形</value>
+    </parameter>
+    <parameter>
+      <valueName>CMAMtext</valueName>
+      <value>[停班停課通知]臺東縣綠島鄉:今天晚上停止上班、停止上課。行政院人事行政總處。如有任何問題請撥1999(縣內直撥)。</value>
+    </parameter>
+    <parameter>
+      <valueName>CHANNEL</valueName>
+      <value>14,0</value>
+    </parameter>
+    <parameter>
+      <valueName>alert_color</valueName>
+      <value>紅色</value>
+    </parameter>
+    <area>
+      <areaDesc>臺東縣綠島鄉</areaDesc>
+      <geocode>
+        <valueName>Taiwan_Geocode_103</valueName>
+        <value>1001411</value>
+      </geocode>
+    </area>
+  </info>
+</alert>

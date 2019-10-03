@@ -1,0 +1,1355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<alert xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>KHC_Parking_20190823224823</identifier>
+  <sender>kcg.gov.tw</sender>
+  <sent>2019-08-23T22:33:00+08:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <info>
+    <language>zh-TW</language>
+    <category>Transport</category>
+    <event>開放臨時停車</event>
+    <urgency>Future</urgency>
+    <severity>Unknown</severity>
+    <certainty>Observed</certainty>
+    <eventCode>
+      <valueName>profile:CAP-TWP:Event:1.0</valueName>
+      <value>Parking</value>
+    </eventCode>
+    <effective>2019-08-23T22:33:00+08:00</effective>
+    <expires>2019-08-27T23:59:00+08:00</expires>
+    <senderName>高雄市政府</senderName>
+    <headline>因應白鹿颱風來襲，本市自今(8/23)日下午22時起開放331處臨時停車處所，供市民緊急停放車輛。</headline>
+    <description>為因應白鹿颱風來襲，本市自今(8/23)日下午22時起(至恢復上班課日上午6:30止) 開放全市331處場所，計11,704停車位，供市民緊急停放車輛(註：僅供臨時停放，不負保管責任)。詳情請參考附件「108年度高雄市颱風豪雨期間開放民眾臨時停車處所一覽表」，請市民多加利用。</description>
+    <web>http://www.tbkc.gov.tw/Achievement/ParkingPlanningAndConstruction/abc78</web>
+    <parameter>
+      <valueName>alert_title</valueName>
+      <value>因應白鹿颱風來襲，本市自今(8/23)日下午22時起開放331處臨時停車處所，供市民緊急停放車輛。</value>
+    </parameter>
+    <area>
+      <areaDesc>苓雅區高雄特殊教育學校</areaDesc>
+      <circle>22.635521,120.322099 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區五權國小</areaDesc>
+      <circle>22.62062,120.324166 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區成功國小</areaDesc>
+      <circle>22.613929,120.297064 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區凱旋國小</areaDesc>
+      <circle>22.636415,120.319935 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區福東國小</areaDesc>
+      <circle>22.62409,120.326947 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區中正國小</areaDesc>
+      <circle>22.630177,120.333309 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區苓洲國小</areaDesc>
+      <circle>22.614522,120.300464 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區福康國小</areaDesc>
+      <circle>22.618957,120.32935 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區中正運動場</areaDesc>
+      <circle>22.626087,120.334542 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區中正高中</areaDesc>
+      <circle>22.626491,120.338791 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區國際商工</areaDesc>
+      <circle>22.6212347,120.3241133 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區三信家商</areaDesc>
+      <circle>22.622265,120.328845 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區道明中學</areaDesc>
+      <circle>22.633376,120.323099 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區大仁國中</areaDesc>
+      <circle>22.632942,120.329433 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區英明國中</areaDesc>
+      <circle>22.615251,120.324395 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區苓雅國中</areaDesc>
+      <circle>22.618984,120.306180 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區四維國小</areaDesc>
+      <circle>22.623092,120.312653 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>苓雅區五福國中</areaDesc>
+      <circle>22.628998,120.3181 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區中正高工</areaDesc>
+      <circle>22.610595,120.317629 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區瑞祥高中</areaDesc>
+      <circle>22.602208,120.324758 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區高雄市立成功特殊教育學校</areaDesc>
+      <circle>22.606545,120.30184 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區獅甲國中</areaDesc>
+      <circle>22.605092,120.308345 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區興仁國中</areaDesc>
+      <circle>22.586338,120.313899 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區光華國中</areaDesc>
+      <circle>22.61083,120.322944 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區瑞豐國中</areaDesc>
+      <circle>22.611085,120.331091 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區佛公國小</areaDesc>
+      <circle>22.572651,120.320909 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區愛群國小</areaDesc>
+      <circle>22.61396,120.312716 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區光華國小</areaDesc>
+      <circle>22.6154429,120.3179183 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區民權國小</areaDesc>
+      <circle>22.608482,120.314444 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區明正國小</areaDesc>
+      <circle>22.580243,120.326581 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區瑞豐國小</areaDesc>
+      <circle>22.60607,120.337023 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區鎮昌國小</areaDesc>
+      <circle>22.590548,120.317983 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區仁愛國小</areaDesc>
+      <circle>22.582011,120.317376 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區樂群國小</areaDesc>
+      <circle>22.608234,120.322489 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區復興國小</areaDesc>
+      <circle>22.608203,120.311425 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區前鎮國中</areaDesc>
+      <circle>22.583367,120.321031 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區前鎮國小</areaDesc>
+      <circle>22.585437,120.308703 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區獅甲國小</areaDesc>
+      <circle>22.606604,120.307154 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前鎮區紅毛港國小</areaDesc>
+      <circle>22.583357,120.334376 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區楠梓高中</areaDesc>
+      <circle>22.743276,120.332432 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區中山高中</areaDesc>
+      <circle>22.729485,120.292212 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區後勁國中</areaDesc>
+      <circle>22.722854,120.316199 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區翠屏國中、小</areaDesc>
+      <circle>22.729477,120.299446 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區莒光國小</areaDesc>
+      <circle>22.711645,120.295323 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區楠梓國小</areaDesc>
+      <circle>22.732233,120.328366 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區右昌國小</areaDesc>
+      <circle>22.713629,120.292106 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區右昌國中</areaDesc>
+      <circle>22.713585,120.286912 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區國昌國中</areaDesc>
+      <circle>22.719434,120.286067 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區後勁國小</areaDesc>
+      <circle>22.721706,120.314216 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區援中國小</areaDesc>
+      <circle>22.727839,120.278262 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區加昌國小</areaDesc>
+      <circle>22.720392,120.296547 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區楠陽國小</areaDesc>
+      <circle>22.724188,120.330947 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區油廠國小</areaDesc>
+      <circle>22.708958,120.302919 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區楠梓國中</areaDesc>
+      <circle>22.735311,120.327365 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>楠梓區楠梓特殊學校</areaDesc>
+      <circle>22.726805,120.311377 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區大榮中學</areaDesc>
+      <circle>22.653618,120.280237 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區壽山國中</areaDesc>
+      <circle>22.633363,120.27853 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區內惟國小</areaDesc>
+      <circle>22.656528,120.276213 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區龍華國小(新校區)</areaDesc>
+      <circle>22.655044,120.29767 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區壽山國小</areaDesc>
+      <circle>22.632574,120.279849 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區高雄市立美術館</areaDesc>
+      <circle>22.664902,120.28806 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區中華藝校</areaDesc>
+      <circle>22.654631,120.288941 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區明華國中</areaDesc>
+      <circle>22.661921,120.301597 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區台電高雄區營業處服務中心(僅洽公臨時停車場)</areaDesc>
+      <circle>22.631588,120.281564 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區中山國小</areaDesc>
+      <circle>22.656835,120.288633 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區鼓山高中</areaDesc>
+      <circle>22.652004,120.274909 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區鼓岩國小</areaDesc>
+      <circle>22.640150,120.283089 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區九如國小</areaDesc>
+      <circle>22.652148,120.278756 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區七賢國中</areaDesc>
+      <circle>22.657594,120.28928 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區九如陸橋</areaDesc>
+      <circle>22.645224,120.281894 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鼓山區願景橋</areaDesc>
+      <circle>22.650546,120.287992 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>新興區新興高中</areaDesc>
+      <circle>22.62443,120.304011 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>新興區高雄高商</areaDesc>
+      <circle>22.625723,120.309502 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>新興區信義國小</areaDesc>
+      <circle>22.631618,120.310999 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>新興區七賢國小</areaDesc>
+      <circle>22.634039,120.306967 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>新興區大同國小</areaDesc>
+      <circle>22.627951,120.298453 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>新興區新興國小</areaDesc>
+      <circle>22.627082,120.304952 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區左營高中</areaDesc>
+      <circle>22.692703,120.296441 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區龍華國中</areaDesc>
+      <circle>22.657149,120.309026 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區福山國中</areaDesc>
+      <circle>22.68104,120.314781 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區新民國小</areaDesc>
+      <circle>22.676691,120.313158 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區明德國小</areaDesc>
+      <circle>22.688413,120.289829 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區新光國小</areaDesc>
+      <circle>22.67983,120.304805 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區勝利國小</areaDesc>
+      <circle>22.672458,120.295103 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區屏山國小</areaDesc>
+      <circle>22.694842,120.300316 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區左營國小</areaDesc>
+      <circle>22.690439,120.293296 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區新上國小</areaDesc>
+      <circle>22.656568,120.310572 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區舊城國小</areaDesc>
+      <circle>22.683197,120.293004 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區新莊高中</areaDesc>
+      <circle>22.681226,120.317589 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區左營國中</areaDesc>
+      <circle>22.679456,120.306725 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區大義國中</areaDesc>
+      <circle>22.674178,120.292816 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區立德國中</areaDesc>
+      <circle>22.690184,120.291156 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區新莊國小</areaDesc>
+      <circle>22.669267,120.309875 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>左營區文府國小</areaDesc>
+      <circle>22.691314,120.315293 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區三民高中</areaDesc>
+      <circle>22.663103,120.326721 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區民族國中</areaDesc>
+      <circle>22.639467,120.333123 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區正興國中</areaDesc>
+      <circle>22.644461,120.319684 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區正興國小</areaDesc>
+      <circle>22.646321,120.326124 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區東光國小</areaDesc>
+      <circle>22.649042,120.339722 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區愛國國小</areaDesc>
+      <circle>22.644535,120.313676 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區三民國小</areaDesc>
+      <circle>22.636672,120.291247 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區光武國小</areaDesc>
+      <circle>22.638797,120.334286 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區鼎金國小</areaDesc>
+      <circle>22.656129,120.321982 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區十全國小</areaDesc>
+      <circle>22.646658,120.29867 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區陽明國小</areaDesc>
+      <circle>22.645717,120.335556 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區莊敬國小</areaDesc>
+      <circle>22.656325,120.324133 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區獅湖國小</areaDesc>
+      <circle>22.672671,120.322193 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區博愛國小</areaDesc>
+      <circle>22.645773,120.307401 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區高雄高中</areaDesc>
+      <circle>22.638245,120.297957 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區高雄高工</areaDesc>
+      <circle>22.65063,120.326452 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區陽明國中</areaDesc>
+      <circle>22.643129,120.340424 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區鼎金國中</areaDesc>
+      <circle>22.654906,120.321043 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區民族國小</areaDesc>
+      <circle>22.64346,120.320164 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區河濱國小</areaDesc>
+      <circle>22.634036,120.287797 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區里民活動中心</areaDesc>
+      <circle>22.648926,120.331846 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>三民區中都橋</areaDesc>
+      <circle>22.640937,120.283363 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鹽埕區鹽埕國小</areaDesc>
+      <circle>22.623692,120.282912 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區高鳳工家</areaDesc>
+      <circle>22.575546,120.375635 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區小港高中</areaDesc>
+      <circle>22.565267,120.35685 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區小港國中</areaDesc>
+      <circle>22.566141,120.338349 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區鳳林國中</areaDesc>
+      <circle>22.521672,120.348551 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區明義國中</areaDesc>
+      <circle>22.582012,120.368241 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區二苓國小</areaDesc>
+      <circle>22.56379,120.353258 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區青山國小</areaDesc>
+      <circle>22.573022,120.36059 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區鳳鳴國小</areaDesc>
+      <circle>22.51549,120.357365 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區小港國小</areaDesc>
+      <circle>22.561717,120.335041 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區鳳林國小</areaDesc>
+      <circle>22.526486,120.34199 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區坪頂國小</areaDesc>
+      <circle>22.561308,120.391566 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區港和國小</areaDesc>
+      <circle>22.568097,120.337879 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區高雄市立空中大學</areaDesc>
+      <circle>22.566433,120.34571 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區明義國小</areaDesc>
+      <circle>22.583386,120.367838 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區中山國中</areaDesc>
+      <circle>22.566087,120.355795 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區餐旅國中</areaDesc>
+      <circle>22.566216,120.371763 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區漢民國小</areaDesc>
+      <circle>22.566703,120.359186 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區華山國小</areaDesc>
+      <circle>22.567696,120.365706 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區鳳陽國小</areaDesc>
+      <circle>22.561458,120.370153 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>小港區高雄市立社會教育館</areaDesc>
+      <circle>22.565158,120.359392 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗津區旗津國中</areaDesc>
+      <circle>22.588601,120.286123 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗津區大汕國小</areaDesc>
+      <circle>22.587852,120.287683 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗津區中洲國小</areaDesc>
+      <circle>22.580044,120.292788 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗津區旗津國小</areaDesc>
+      <circle>22.608544,120.271833 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前金區前金國小</areaDesc>
+      <circle>22.626351,120.293922 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前金區前金國中</areaDesc>
+      <circle>22.629361,120.290459 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前金區社區運動廣場</areaDesc>
+      <circle>22.619961,120.298954 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>前金區財政局（舊市議會停車場）</areaDesc>
+      <circle>22.628814,120.293481 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區鳳西國中</areaDesc>
+      <circle>22.62101,120.353589 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區鳳甲國中</areaDesc>
+      <circle>22.616918,120.342536 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區正義國小</areaDesc>
+      <circle>22.604135,120.340258 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區南成國小</areaDesc>
+      <circle>22.594225,120.335301 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區文山國小</areaDesc>
+      <circle>22.633874,120.359533 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區過埤國小</areaDesc>
+      <circle>22.590705,120.362291 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區忠孝國小</areaDesc>
+      <circle>22.62151,120.285322 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區忠孝國中</areaDesc>
+      <circle>22.619983,120.346448 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區青年國中</areaDesc>
+      <circle>22.630785,120.349 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區文華國小</areaDesc>
+      <circle>22.6344,120.352746 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區福誠高中</areaDesc>
+      <circle>22.590487,120.323885 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區鳳山國中</areaDesc>
+      <circle>22.625285,120.372009 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區鳳山國小</areaDesc>
+      <circle>22.624823,120.356507 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區大東國小</areaDesc>
+      <circle>22.623973,120.36226 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區鎮北國小</areaDesc>
+      <circle>22.642978,120.36785 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區誠正國小</areaDesc>
+      <circle>22.616848,120.363867 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區新甲國小</areaDesc>
+      <circle>22.613771,120.339923 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區鳳西國小</areaDesc>
+      <circle>22.61715,120.358728 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區文德國小</areaDesc>
+      <circle>22.640693,120.353925 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區瑞興國小</areaDesc>
+      <circle>22.63018,120.368353 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區福誠國小</areaDesc>
+      <circle>22.596813,120.325055 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區中崙國小</areaDesc>
+      <circle>22.59914,120.350584 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區鳳翔國小</areaDesc>
+      <circle>22.595332,120.340798 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區五甲國中</areaDesc>
+      <circle>22.598112,120.328691 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區中崙國中</areaDesc>
+      <circle>22.603304,120.353555 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區曹公國小</areaDesc>
+      <circle>22.627697,120.357538 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區中山國小</areaDesc>
+      <circle>22.630657,120.349906 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳳山區鳳翔國中</areaDesc>
+      <circle>22.597332,120.348034 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳥松區文山高中</areaDesc>
+      <circle>22.64819,120.352786 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳥松區大華國小</areaDesc>
+      <circle>22.653733,120.340501 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳥松區仁美國小</areaDesc>
+      <circle>22.658433,120.394141 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳥松區鳥松國小</areaDesc>
+      <circle>22.663439,120.361574 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳥松區鳥松國中</areaDesc>
+      <circle>22.666313,120.372046 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>鳥松區鳥松區老人文康活動中心</areaDesc>
+      <circle>22.651111,120.39534 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大寮區大寮國小</areaDesc>
+      <circle>22.590861,120.416445 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大寮區山頂國小</areaDesc>
+      <circle>22.607807,120.388806 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大寮區後庄國小</areaDesc>
+      <circle>22.637822,120.389503 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大寮區忠義國小</areaDesc>
+      <circle>22.616353,120.384143 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大寮區中庄國中</areaDesc>
+      <circle>22.636416,120.401844 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大寮區大寮國中</areaDesc>
+      <circle>22.603552,120.392721 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大寮區潮寮國小</areaDesc>
+      <circle>22.565716,120.425144 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大寮區中庄國小</areaDesc>
+      <circle>22.634538,120.397543 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大寮區潮寮國中</areaDesc>
+      <circle>22.563415,120.425175 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大寮區昭明國小</areaDesc>
+      <circle>22.54239,120.408514 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>林園區林園高中</areaDesc>
+      <circle>22.513749,120.39492 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>林園區林園國小</areaDesc>
+      <circle>22.507299,120.39312 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>林園區王公國小</areaDesc>
+      <circle>22.504698,120.388254 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>林園區金潭國小</areaDesc>
+      <circle>22.52809,120.396063 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大樹區大樹國中</areaDesc>
+      <circle>22.657006,120.422752 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大樹區龍目國小</areaDesc>
+      <circle>22.688507,120.408531 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大樹區小坪國小</areaDesc>
+      <circle>22.681232,120.412819 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大樹區大樹國小</areaDesc>
+      <circle>22.687763,120.434591 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大樹區九曲國小</areaDesc>
+      <circle>22.655886,120.423343 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大樹區水寮國小</areaDesc>
+      <circle>22.667994,120.407847 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大樹區興田國小</areaDesc>
+      <circle>22.667994,120.407847 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大樹區大樹區公所</areaDesc>
+      <circle>22.693326,120.433045 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大社區大社國中</areaDesc>
+      <circle>22.729029,120.357267 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大社區嘉誠國小</areaDesc>
+      <circle>22.748375,120.379904 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大社區大社國小</areaDesc>
+      <circle>22.730347,120.345858 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大社區觀音國小</areaDesc>
+      <circle>22.723045,120.356065 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>大社區老人文康活動中心</areaDesc>
+      <circle>22.729347,120.354581 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>岡山區岡山國中</areaDesc>
+      <circle>22.791083,120.30327 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>岡山區嘉興國中</areaDesc>
+      <circle>22.816175,120.311911 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>岡山區前峰國中</areaDesc>
+      <circle>22.789449,120.28842 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>岡山區岡山國小</areaDesc>
+      <circle>22.791424,120.293671 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>岡山區前峰國小</areaDesc>
+      <circle>22.792351,120.282833 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>岡山區後紅國小</areaDesc>
+      <circle>22.792904,120.30344 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>岡山區竹圍國小</areaDesc>
+      <circle>22.802975,120.30283 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>岡山區壽天國小</areaDesc>
+      <circle>22.798857,120.292481 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>路竹區蔡文國小</areaDesc>
+      <circle>22.861157,120.255732 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>路竹區一甲國中</areaDesc>
+      <circle>22.868822,120.271882 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>路竹區路竹高中</areaDesc>
+      <circle>22.855385,120.25221 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>路竹區路竹國小</areaDesc>
+      <circle>22.856684,120.259607 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>路竹區大社國小</areaDesc>
+      <circle>22.867067,120.265351 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>路竹區北嶺國小</areaDesc>
+      <circle>22.823505,120.269765 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>路竹區三埤國小</areaDesc>
+      <circle>22.836690,120.279911 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>路竹區一甲國小</areaDesc>
+      <circle>22.874963,120.269961 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>路竹區路竹幼兒園</areaDesc>
+      <circle>22.849034,120.277642 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>彌陀區彌陀國小</areaDesc>
+      <circle>22.783678,120.247781 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>茄萣區茄萣國中</areaDesc>
+      <circle>22.906889,120.181014 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>茄萣區興達國小</areaDesc>
+      <circle>22.876054,120.196298 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>茄萣區茄萣國小</areaDesc>
+      <circle>22.903281,120.181985 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>茄萣區成功國小</areaDesc>
+      <circle>22.888687,120.186031 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>茄萣區砂崙國小</areaDesc>
+      <circle>22.91319,120.182354 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>湖內區大湖國小</areaDesc>
+      <circle>22.887757,120.244517 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>湖內區明宗國小</areaDesc>
+      <circle>22.906735,120.222481 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>田寮區田寮國中</areaDesc>
+      <circle>22.862837,120.360721 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>田寮區高雄市立圖書館田寮分館</areaDesc>
+      <circle>22.869828,120.359139 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>田寮區高雄市田寮區公所</areaDesc>
+      <circle>22.869903,120.359362 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>田寮區崇德國小</areaDesc>
+      <circle>22.87803,120.379529 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>田寮區新興國小</areaDesc>
+      <circle>22.835492,120.369696 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>阿蓮區復安國小</areaDesc>
+      <circle>22.849101,120.324142 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>阿蓮區中路國小</areaDesc>
+      <circle>22.894931,120.298575 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>阿蓮區阿蓮國中</areaDesc>
+      <circle>22.885159,120.325799 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>阿蓮區阿蓮國小</areaDesc>
+      <circle>22.88323,120.329869 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>阿蓮區阿蓮區公所</areaDesc>
+      <circle>22.883215,120.327464 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>內門區內門國小</areaDesc>
+      <circle>22.939349,120.461123 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>內門區西門國小</areaDesc>
+      <circle>22.92009,120.430352 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>內門區溝坪國小</areaDesc>
+      <circle>22.993377,120.501247 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>內門區景義國小</areaDesc>
+      <circle>22.955964,120.494233 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>內門區觀亭國小</areaDesc>
+      <circle>22.917525,120.453514 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>內門區內門國中</areaDesc>
+      <circle>22.921882,120.453517 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>內門區金竹國小</areaDesc>
+      <circle>23.009137,120.514514 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>內門區木柵國小</areaDesc>
+      <circle>22.975346,120.467861 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>內門區內門區公所</areaDesc>
+      <circle>22.942858,120.4625 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>內門區觀亭里聯合辦公處</areaDesc>
+      <circle>22.920027,120.456316 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>燕巢區燕巢國中</areaDesc>
+      <circle>22.785833,120.362845 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>燕巢區燕巢國小</areaDesc>
+      <circle>22.795258,120.36587 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>燕巢區橫山國小</areaDesc>
+      <circle>22.768542,120.379471 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>燕巢區安招國小</areaDesc>
+      <circle>22.790854,120.33783 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>燕巢區深水國小</areaDesc>
+      <circle>22.777039,120.405278 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>燕巢區燕巢區公所</areaDesc>
+      <circle>22.78808,120.362079 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>燕巢區燕巢區民眾活動中心</areaDesc>
+      <circle>22.782475,120.362246 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>美濃區龍肚國中</areaDesc>
+      <circle>22.878214,120.571205 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>美濃區龍山國小</areaDesc>
+      <circle>22.864499,120.556245 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>美濃區吉洋國小</areaDesc>
+      <circle>22.861006,120.520821 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>美濃區美濃國中</areaDesc>
+      <circle>22.894745,120.5435 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>美濃區廣興國小</areaDesc>
+      <circle>22.917531,120.567761 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>美濃區南隆國中</areaDesc>
+      <circle>22.866427,120.534528 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>美濃區中壇國小</areaDesc>
+      <circle>22.884028,120.530975 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>美濃區龍肚國小</areaDesc>
+      <circle>22.885853,120.579991 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>美濃區福安國小</areaDesc>
+      <circle>22.897577,120.5192 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>美濃區美濃國小</areaDesc>
+      <circle>22.899835,120.543193 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>美濃區東門國小</areaDesc>
+      <circle>22.899832,120.553174 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗山區旗山國中</areaDesc>
+      <circle>22.881407,120.481321 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗山區嶺口國小</areaDesc>
+      <circle>22.77615,120.44886 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗山區圓富國中</areaDesc>
+      <circle>22.928808,120.500528 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗山區旗山國小</areaDesc>
+      <circle>22.888292,120.480697 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗山區溪洲國小</areaDesc>
+      <circle>22.847679,120.465207 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗山區鼓山國小</areaDesc>
+      <circle>22.898897,120.482848 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗山區圓潭國小</areaDesc>
+      <circle>22.933679,120.503382 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗山區旗尾國小</areaDesc>
+      <circle>22.882428,120.491948 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗山區大洲國中</areaDesc>
+      <circle>22.835363,120.460531 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>旗山區鼓山公園</areaDesc>
+      <circle>22.887756,120.478732 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>杉林區集來國小</areaDesc>
+      <circle>23.022241,120.561499 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>杉林區上平國小</areaDesc>
+      <circle>22.976853,120.544072 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>杉林區杉林國中</areaDesc>
+      <circle>22.968576,120.540834 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>杉林區杉林國小</areaDesc>
+      <circle>22.998095,120.548069 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>杉林區月美國小</areaDesc>
+      <circle>22.958373,120.535564 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>杉林區巴楠花部落小學</areaDesc>
+      <circle>22.963958,120.538854 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>杉林區新庄國小</areaDesc>
+      <circle>22.989102,120.559681 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>甲仙區寶隆國小</areaDesc>
+      <circle>23.049345,120.555507 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>甲仙區甲仙國小</areaDesc>
+      <circle>23.081444,120.588891 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>甲仙區甲仙國中</areaDesc>
+      <circle>23.080974,120.592022 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>甲仙區小林國小</areaDesc>
+      <circle>23.148576,120.63203 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>六龜區六龜高中</areaDesc>
+      <circle>22.99318,120.635085 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>六龜區新威國小</areaDesc>
+      <circle>22.900102,120.627629 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>六龜區新發國小</areaDesc>
+      <circle>23.031783,120.662468 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>六龜區寶來國小</areaDesc>
+      <circle>23.108831,120.700921 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>六龜區龍興國小</areaDesc>
+      <circle>22.99342,120.645309 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>六龜區寶來國中</areaDesc>
+      <circle>23.109359,120.703635 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>六龜區六龜國小</areaDesc>
+      <circle>22.996258,120.634214 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>六龜區荖濃國小</areaDesc>
+      <circle>23.073552,120.672457 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>六龜區六龜區公所</areaDesc>
+      <circle>22.998385,120.632748 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>桃源區桃源里綜合運動場</areaDesc>
+      <circle>23.159089,120.764614 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>桃源區梅山里社區運動場</areaDesc>
+      <circle>23.265850,120.825018 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>桃源區桃源國中</areaDesc>
+      <circle>23.178855,120.781013 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>桃源區桃源國小</areaDesc>
+      <circle>23.160472,120.765756 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>桃源區興中國小</areaDesc>
+      <circle>23.128565,120.719029 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>桃源區樟山國小</areaDesc>
+      <circle>23.252766,120.819366 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>桃源區寶山國小</areaDesc>
+      <circle>23.055424,120.721594 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>桃源區建山國小</areaDesc>
+      <circle>23.105401,120.682587 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>桃源區復興里運動球場</areaDesc>
+      <circle>23.159074,120.764651 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>桃源區復興里二集團社區球場</areaDesc>
+      <circle>23.218653,120.805463 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>茂林區茂林國中</areaDesc>
+      <circle>22.884938,120.663963 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>茂林區茂林區公所</areaDesc>
+      <circle>22.886207,120.663234 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>茂林區茂林國小</areaDesc>
+      <circle>22.886119,120.664404 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>茂林區多納國小</areaDesc>
+      <circle>22.910047,120.716091 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>永安區永安國中</areaDesc>
+      <circle>22.823171,120.240646 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>永安區維新國小</areaDesc>
+      <circle>22.804034,120.247963 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>那瑪夏區民生國小</areaDesc>
+      <circle>23.27634,120.721363 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>那瑪夏區民權國小</areaDesc>
+      <circle>23.248698,120.702824 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>仁武區仁武高中</areaDesc>
+      <circle>22.702456,120.356315 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>仁武區仁武特殊教育學校</areaDesc>
+      <circle>22.683808,120.346105 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>仁武區仁武國小</areaDesc>
+      <circle>22.701362,120.348318 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>仁武區竹後國小</areaDesc>
+      <circle>22.710042,120.334866 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>仁武區烏林國小</areaDesc>
+      <circle>22.697888,120.372598 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>仁武區八卦國小</areaDesc>
+      <circle>22.689043,120.333146 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>仁武區灣內國小</areaDesc>
+      <circle>22.683088,120.357281 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>橋頭區橋頭國小</areaDesc>
+      <circle>22.761734,120.305353 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>橋頭區仕隆國小</areaDesc>
+      <circle>22.751056,120.311738 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>橋頭區甲圍國小</areaDesc>
+      <circle>22.735575,120.293581 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>梓官區梓官國中</areaDesc>
+      <circle>22.762428,120.263476 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>梓官區蚵寮國中</areaDesc>
+      <circle>22.728551,120.25873 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>梓官區蚵寮國小</areaDesc>
+      <circle>22.733411,120.248239 0.1</circle>
+    </area>
+    <area>
+      <areaDesc>梓官區梓官國小</areaDesc>
+      <circle>22.759594,120.264663 0.1</circle>
+    </area>
+  </info>
+</alert>
