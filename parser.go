@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/xml"
+	"time"
 )
 
 type Alert struct {
@@ -16,16 +17,15 @@ type Alert struct {
 }
 
 type Info struct {
-	XMLName   xml.Name `xml:"info"`
-	Language  string   `xml:"language"`
-	Category  string   `xml:"category"`
-	Event     string   `xml:"event"`
-	Urgency   string   `xml:"urgency"`
-	Serverity string   `xml:"serverity"`
-	Certainty string   `xml:"certainty"`
-	// eventCode are unnecessary
-	Effective   string      `xml:"effective"`
-	Expires     string      `xml:"expires"`
+	XMLName     xml.Name    `xml:"info"`
+	Language    string      `xml:"language"`
+	Category    string      `xml:"category"`
+	Event       string      `xml:"event"`
+	Urgency     string      `xml:"urgency"`
+	Serverity   string      `xml:"serverity"`
+	Certainty   string      `xml:"certainty"`
+	Effective   time.Time   `xml:"effective"`
+	Expires     time.Time   `xml:"expires"`
 	SenderName  string      `xml:"senderName"`
 	Headline    string      `xml:"headline"`
 	Description string      `xml:"description"`
