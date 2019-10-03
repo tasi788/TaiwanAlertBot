@@ -97,6 +97,7 @@ func process(resp []byte) {
 	for n := range alert.Info[0].Parameter {
 		if alert.Info[0].Parameter[n].ValueName == "alert_color" {
 			AlertColor = Color(alert.Info[0].Parameter[n].Value)
+			break
 		} else {
 			AlertColor = "無顏色"
 		}
