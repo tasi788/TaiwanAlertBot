@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<alert xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>CDC_communicable_20190521123448_001</identifier>
+  <sender>cdcinfo@cdc.gov.tw</sender>
+  <sent>2019-05-21T12:34:48+08:00</sent>
+  <status>Test</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <info>
+    <language>zh-tw</language>
+    <category>Health</category>
+    <event>傳染病</event>
+    <responseType>Monitor</responseType>
+    <urgency>Immediate</urgency>
+    <severity>Unknown</severity>
+    <certainty>Observed</certainty>
+    <eventCode>
+      <valueName>profile:CAP-TWP:Event:1.0</valueName>
+      <value>communicable</value>
+    </eventCode>
+    <effective>2019-05-21T13:30:00+08:00</effective>
+    <expires>2019-05-21T14:30:00+08:00</expires>
+    <senderName>疾病管制署</senderName>
+    <headline>0521_正式伺服器_測試</headline>
+    <description>0521_正式伺服器_測試</description>
+    <instruction>0521_正式伺服器_測試</instruction>
+    <web>http://google.com.tw</web>
+    <parameter>
+      <valueName>alert_title</valueName>
+      <value>傳染病</value>
+    </parameter>
+    <parameter>
+      <valueName>alert_disease</valueName>
+      <value>霍亂　傷寒　副傷寒　</value>
+    </parameter>
+    <parameter>
+      <valueName>CHANNEL</valueName>
+      <value>14,0</value>
+    </parameter>
+    <parameter>
+      <valueName>disease_category</valueName>
+      <value>2 2 2 </value>
+    </parameter>
+    <parameter>
+      <valueName>dissemination_area</valueName>
+      <value>Geocode-all</value>
+    </parameter>
+    <area>
+      <areaDesc>宜蘭縣</areaDesc>
+      <geocode>
+        <valueName>Taiwan_Geocode_103</valueName>
+        <value>10002</value>
+      </geocode>
+    </area>
+    <area>
+      <areaDesc>嘉義縣</areaDesc>
+      <geocode>
+        <valueName>Taiwan_Geocode_103</valueName>
+        <value>10010</value>
+      </geocode>
+    </area>
+  </info>
+</alert>

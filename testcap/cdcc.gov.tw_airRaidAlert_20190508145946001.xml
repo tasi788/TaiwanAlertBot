@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<alert xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>cdcc.gov.tw_airRaidAlert_20190508145946001</identifier>
+  <sender>alert@ms1.cdcc.gov.tw</sender>
+  <sent>2019-05-08T15:55:00+08:00</sent>
+  <status>Test</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <info>
+    <language>zh-TW</language>
+    <category>Security</category>
+    <event>防空</event>
+    <responseType>Shelter</responseType>
+    <urgency>Immediate</urgency>
+    <severity>Minor</severity>
+    <certainty>Observed</certainty>
+    <eventCode>
+      <valueName>profile:CAP-TWP:Event:1.0</valueName>
+      <value>airRaidAlert</value>
+    </eventCode>
+    <effective>2019-05-08T15:55:00+08:00</effective>
+    <expires>2019-05-08T15:56:00+08:00</expires>
+    <senderName>內政部警政署民防指揮管制所</senderName>
+    <headline>萬安演習</headline>
+    <description>系統測試</description>
+    <instruction>系統測試</instruction>
+    <web>http://goo.gl/NfrnNa</web>
+    <parameter>
+      <valueName>alert_title</valueName>
+      <value>萬安演習</value>
+    </parameter>
+    <parameter>
+      <valueName>CMAMtext</valueName>
+      <value>系統測試</value>
+    </parameter>
+    <parameter>
+      <valueName>CHANNEL</valueName>
+      <value>13,131234 14,0</value>
+    </parameter>
+    <area>
+      <areaDesc>區域範圍</areaDesc>
+      <circle>1,1 0.01</circle>
+    </area>
+  </info>
+</alert>

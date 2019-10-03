@@ -4,3 +4,11 @@
 .ipynb_checkpoints/
 
 token/
+
+cap/
+
+config.txt
+
+.vscode/
+
+*.cfg

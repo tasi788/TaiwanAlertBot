@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<alert xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>HEX_SAVE_fireAlarm_20190729054142</identifier>
+  <sender>www.hexsave.com</sender>
+  <sent>2019-07-29T05:41:42+08:00</sent>
+  <status>Test</status>
+  <msgType>Alert</msgType>
+  <source>HEXSAVE_Provider</source>
+  <scope>Public</scope>
+  <code>profile:CAP-TWP:1.0</code>
+  <info>
+    <language>zh-TW</language>
+    <category>Fire</category>
+    <event>結構火災</event>
+    <responseType>Evacuate</responseType>
+    <urgency>Immediate</urgency>
+    <severity>Severe</severity>
+    <certainty>Observed</certainty>
+    <eventCode>
+      <valueName>profile:CAP-TWP:Event:1.0</valueName>
+      <value>structurFire</value>
+    </eventCode>
+    <effective>2019-07-29T05:41:42+08:00</effective>
+    <expires>2019-07-30T05:41:42+08:00</expires>
+    <senderName>HEX瑞德感知</senderName>
+    <headline>火災警報: Site Address</headline>
+    <description>07/29-05:41 Site Address，火災樓層:9F樓，總樓層:10樓。9F 警報感應器：L15-020</description>
+    <instruction>案場外之人員可與相關消防單位進行進一步的通報與確認，並協助案場內人員之疏散。</instruction>
+    <web>http://www.hexsave.com/</web>
+    <contact>電話：02-2362-9168
+地址：台北市中正區羅斯福路二段100號25樓</contact>
+    <parameter>
+      <valueName>alert_title</valueName>
+      <value>火災警報</value>
+    </parameter>
+    <parameter>
+      <valueName>alert_level</valueName>
+      <value>0</value>
+    </parameter>
+    <parameter>
+      <valueName>alert_device</valueName>
+      <value>9F 警報感應器：L15-020</value>
+    </parameter>
+    <area>
+      <areaDesc>Site Address</areaDesc>
+      <circle>24.978476,121.504593 0.1</circle>
+      <altitude>9</altitude>
+      <ceiling>10</ceiling>
+    </area>
+  </info>
+</alert>
