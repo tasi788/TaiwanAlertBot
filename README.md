@@ -4,14 +4,17 @@
 整理來自[災害示警公開資料平台](https://alerts.ncdr.nat.gov.tw)的資料，用於[Telegram](https://telegram.org)公開頻台廣播。
 
 \*備註\*  
-由於資料量非常多，以及欄位並未統一，因此處理速度有點緩慢。
-想加入我們的請參與我們的[公開群組](https://t.me/joinchat/H06D30hvYRkKZP4mJirjVg)
+由於資料量非常多，以及欄位並未統一，可能某些時候資料無法正常推送。
+歡迎加入我們的[公開群組](https://t.me/TaiwanAlertGroup)
 
 ## Issue
 找到but或是想提出建議嗎？  
 歡迎提出你的想法與建議！  
 
 ---
+##### 綜合警報
+ - https://t.me/TaiwanAlert 
+
 
 ##### 中央氣象局  
 
