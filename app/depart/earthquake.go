@@ -2,6 +2,7 @@ package depart
 
 import (
 	"encoding/xml"
+	"fmt"
 	"strings"
 )
 
@@ -81,8 +82,9 @@ func Earthquake(resp []byte) (string, string) {
 		"震央位置：" + QuakeLocation + "\n" +
 		"地震深度：" + strings.Replace(Depth, "公里", " 公里", -1) + "\n" +
 		"地震強度：" + strings.Replace(Magnitude, "規模", "規模 ", -1) + "\n" +
-		"警報簡述：" + Info.Description
-
+		"警報簡述：" + Info.Description + "\n\n" +
+		"*備註*\n" +
+		fmt.Sprintf("相關詳細地震資訊請上<a href=\"%v/\">地震測報中心</a>", Info.Web)
 	/*
 		發布單位：#中央氣象局
 		地震資料來源：中央氣象局
