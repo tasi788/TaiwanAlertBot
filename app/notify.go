@@ -52,6 +52,7 @@ func notify(text string, alert parser.Alert, resp []byte) {
 			}
 			msg := tgbotapi.NewPhotoUpload(ChatIdList[ChatId], sendPhoto)
 			msg.Caption = text
+			msg.ParseMode = "html"
 			sent, err = bot.Send(msg)
 		} else {
 			msg := tgbotapi.NewMessage(ChatIdList[ChatId], text)
