@@ -1,7 +1,14 @@
+import { XMLParser } from 'fast-xml-parser';
+import { AlertRoot } from './types';
+
+import { Telegram } from './telegram';
+
 export interface Env {
 	BOTTOKEN: string;
 	WEBHOOK_PATH: string;
+	CHATID: number;
 }
+
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext) {
@@ -15,8 +22,23 @@ export default {
 		}
 		
 		const body = await request.text();
+		let alert = await this.parse(env, body);
+		await this.broadcast(env, alert);
 		return new Response('ok');
-		
-
 	},
+
+	async broadcast(env: Env, alert: AlertRoot) {
+		const bot = new Telegram(env.BOTTOKEN);
+		
+		// const bot = new Telegraf(env.BOTTOKEN)
+		let text = "喵喵測試\n" +
+				   `${alert.alert.info.event}`
+
+		await bot.sendMessage(env.CHATID, text)
+	},
+
+	async parse(env: Env, context: string): Promise<AlertRoot> {
+		const parser = new XMLParser();
+		return parser.parse(context) as AlertRoot;
+	}
 };
