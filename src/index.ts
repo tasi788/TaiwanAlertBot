@@ -2,6 +2,7 @@ import { XMLParser } from 'fast-xml-parser';
 import { AlertRoot } from './types';
 
 import { Telegram } from './telegram';
+import { ExecutionContext } from '@cloudflare/workers-types/experimental';
 
 export interface Env {
 	BOTTOKEN: string;
@@ -22,19 +23,19 @@ export default {
 		}
 		
 		const body = await request.text();
-		let alert = await this.parse(env, body);
-		await this.broadcast(env, alert);
+		let report = await this.parse(env, body);
+		await this.broadcast(env, report);
 		return new Response('ok');
 	},
 
-	async broadcast(env: Env, alert: AlertRoot) {
+	async broadcast(env: Env, report: AlertRoot) {
 		const bot = new Telegram(env.BOTTOKEN);
-		
-		// const bot = new Telegraf(env.BOTTOKEN)
-		let text = "喵喵測試\n" +
-				   `${alert.alert.info.event}`
+		let text = `測試測試\n發布單位：#${report.alert.info.senderName}\n` +
+				   `警報活動：#${report.alert.info.event}\n` +
+				   `警報顏色：還沒寫\n` +
+				   `警報標題：${report.alert.info.headline}\n`
 
-		await bot.sendMessage(env.CHATID, text)
+		await bot.sendMessage(env.CHATID, text, 1);
 	},
 
 	async parse(env: Env, context: string): Promise<AlertRoot> {
