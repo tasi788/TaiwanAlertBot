@@ -30,12 +30,23 @@ export default {
 
 	async broadcast(env: Env, report: AlertRoot) {
 		const bot = new Telegram(env.BOTTOKEN);
-		let text = `測試測試\n發布單位：#${report.alert.info.senderName}\n` +
+		const topicList = {
+			"category": {
+				"Health": 1423,
+				"Geo": 1439,
+			},
+			"event": {
+				"降雨": 123
+			}
+			
+		}
+		let text = `發布單位：#${report.alert.info.senderName}\n` +
 				   `警報活動：#${report.alert.info.event}\n` +
 				   `警報顏色：還沒寫\n` +
-				   `警報標題：${report.alert.info.headline}\n`
+				   `警報標題：${report.alert.info.headline}\n` +
+				   `警報描述：${report.alert.info.description}\n`
 
-		await bot.sendMessage(env.CHATID, text, 1);
+		// await bot.sendMessage(env.CHATID, text, 1);
 	},
 
 	async parse(env: Env, context: string): Promise<AlertRoot> {
