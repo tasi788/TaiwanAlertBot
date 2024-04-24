@@ -26,7 +26,7 @@ export default {
 		const body = await request.text();
 		let report = await this.parse(env, body);
 		await this.broadcast(env, report);
-		return new Response('ok');
+		return new Response('<?xml version=\"1.0\" encoding=\"utf-8\" ?> <Data><Status>True</Status></Data>');
 	},
 
 	async broadcast(env: Env, report: AlertRoot) {
