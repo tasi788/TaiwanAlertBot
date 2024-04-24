@@ -31,6 +31,7 @@ export default {
 
 	async broadcast(env: Env, report: AlertRoot) {
 		const bot = new Telegram(env.BOTTOKEN);
+		const gather = 1882;
 		const topicList = {
 			"category": {
 				"Health": 1423,
@@ -41,13 +42,27 @@ export default {
 			}
 		}
 		let text = "";
+		let msg_id = 0;
 		switch (report.alert.info.event) {
 			case '地震':
 				let context = await earthquake(report)
-				await bot.sendMediaGroup(env.CHATID, context.image, context.text, 678)
+				msg_id = await bot.sendMediaGroup(env.CHATID, context.image, context.text, gather)
 				
 			default:
 				break;
+		}
+		for (let category in topicList.category) {
+			if (category === report.alert.info.category) {
+				let topic: number = topicList.category[category as keyof typeof topicList.category];
+				await bot.copyMessage(env.CHATID, env.CHATID, msg_id, topic)
+			}
+		}
+
+		for (let event in topicList.event) {
+			if (event === report.alert.info.event) {
+				let topic: number = topicList.event[event as keyof typeof topicList.event];
+				await bot.copyMessage(env.CHATID, env.CHATID, msg_id, topic)
+			}
 		}
 		
 
