@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>cwa.gov.tw_thunderstorm_20240424044654_000</identifier>
+  <sender>weather@cwa.gov.tw</sender>
+  <sent>2024-04-24T04:46:54+08:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <info>
+    <language>zh-TW</language>
+    <category>Met</category>
+    <event>雷雨</event>
+    <responseType>Shelter</responseType>
+    <urgency>Expected</urgency>
+    <severity>Severe</severity>
+    <certainty>Observed</certainty>
+    <eventCode>
+      <!--NCDR要求的介接參數-->
+      <valueName>profile:CAP-TWP:Event:1.0</valueName>
+      <value>thunderstorm</value>
+    </eventCode>
+    <effective>2024-04-24T04:45:00+08:00</effective>
+    <onset>2024-04-24T04:45:00+08:00</onset>
+    <expires>2024-04-24T06:15:00+08:00</expires>
+    <senderName>中央氣象署</senderName>
+    <headline>雷雨即時訊息</headline>
+    <description>113 年 4 月 24 日 4 時 45 分 氣象署發布大雷雨即時訊息，持續時間至 6 時 15 分；請慎防劇烈降雨、雷擊、9級以上強陣風，溪(河)水暴漲，坍方、落石、土石流，低窪地區慎防淹水，以及低能見度</description>
+    <instruction/>
+    
+    <parameter><valueName>CMAMtext</valueName><value>[大雷雨即時訊息]您所在區域附近有劇烈雷雨或降雨發生，請注意防範，持續至04/24 06:15，氣象署Watch out for extremely heavy rain in area(s) nearby until Apr. 24, 06:15.CWA 02-23491234</value></parameter><parameter><valueName>CHANNEL</valueName><value>14,0</value></parameter><parameter><!--給電視台秀的文字--><valueName>TVtext</valueName><value>大雷雨即時訊息04/24 04:45臺中市,苗栗縣,彰化縣,請慎防劇烈降雨、雷擊、9級以上強陣風，溪(河)水暴漲，坍方、落石、土石流，低窪地區慎防淹水，以及低能見度</value></parameter><parameter><!--有影響到的縣市--><valueName>counties</valueName><value>臺中市,苗栗縣,彰化縣</value></parameter><parameter><!--有影響到的鄉鎮--><valueName>townships</valueName><value>臺中市中區 臺中市東區 臺中市西區 臺中市南區 臺中市北區 臺中市西屯區 臺中市南屯區 臺中市北屯區 苗栗縣苑裡鎮 苗栗縣公館鄉 苗栗縣銅鑼鄉 苗栗縣三義鄉 苗栗縣南庄鄉 苗栗縣大湖鄉 苗栗縣卓蘭鎮 苗栗縣獅潭鄉 苗栗縣泰安鄉 臺中市豐原區 臺中市東勢區 臺中市大甲區 臺中市清水區 臺中市沙鹿區 臺中市梧棲區 臺中市神岡區 臺中市后里區 臺中市大雅區 臺中市潭子區 臺中市新社區 臺中市石岡區 臺中市外埔區 臺中市烏日區 臺中市大肚區 臺中市龍井區 臺中市霧峰區 臺中市太平區 臺中市大里區 臺中市和平區 彰化縣彰化市 彰化縣鹿港鎮 彰化縣和美鎮 彰化縣二林鎮 彰化縣線西鄉 彰化縣伸港鄉 彰化縣福興鄉 彰化縣秀水鄉 彰化縣花壇鄉 彰化縣埔鹽鄉 彰化縣芳苑鄉</value></parameter><parameter>
+      <!--NCDR要求的介接參數-->
+      <valueName>alert_title</valueName>
+      <value>雷雨即時訊息</value>
+    </parameter>
+    <parameter>
+      <!--NCDR要求的介接參數-->
+      <valueName>alert_color</valueName>
+      <value>橙色</value>
+    </parameter>
+    <parameter>
+      <!--Google crisis map 跟 public alert要用的參數-->
+      <valueName>website_color</valueName>
+      <value>255,128,0</value>
+    </parameter>
+    
+    <area>
+      <areaDesc>臺中市(中區 東區 西區等共28鄉鎮區),苗栗縣(苑裡鎮 公館鄉 銅鑼鄉等共9鄉鎮區),彰化縣(彰化市 鹿港鎮 和美鎮等共11鄉鎮區)</areaDesc>
+      <polygon>24.45,121.07 24.15,120.82 23.96,120.38 24.01,120.34 24.05,120.35 24.15,120.42 24.55,120.93 24.45,121.07</polygon>
+    </area>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </info>
+</alert>

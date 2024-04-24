@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>cwa.gov.tw_thunderstorm_20240422145334_000</identifier>
+  <sender>weather@cwa.gov.tw</sender>
+  <sent>2024-04-22T14:53:34+08:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <info>
+    <language>zh-TW</language>
+    <category>Met</category>
+    <event>雷雨</event>
+    <responseType>Shelter</responseType>
+    <urgency>Expected</urgency>
+    <severity>Severe</severity>
+    <certainty>Observed</certainty>
+    <eventCode>
+      <!--NCDR要求的介接參數-->
+      <valueName>profile:CAP-TWP:Event:1.0</valueName>
+      <value>thunderstorm</value>
+    </eventCode>
+    <effective>2024-04-22T14:52:00+08:00</effective>
+    <onset>2024-04-22T14:52:00+08:00</onset>
+    <expires>2024-04-22T15:45:00+08:00</expires>
+    <senderName>中央氣象署</senderName>
+    <headline>雷雨即時訊息</headline>
+    <description>113 年 4 月 22 日 14 時 52 分 氣象署發布大雷雨即時訊息，持續時間至 15 時 45 分；請慎防劇烈降雨、雷擊，溪(河)水暴漲，坍方、落石、土石流，以及低能見度</description>
+    <instruction>路面濕滑，步行與開車請注意安全。 能見度低，請注意行車安全、減速慢行。 請進入室內，遠離山頂、屋頂、涼亭、獨立樹下、溪流或水塘，位於空曠區域應蹲下並盡量減少與地面接觸的面積。 切勿在河流、溪澗或低窪地區逗留。</instruction>
+    
+    <parameter><valueName>CMAMtext</valueName><value>[大雷雨即時訊息]您所在區域附近有劇烈雷雨或降雨發生，請注意防範，持續至04/22 15:45，氣象署Watch out for extremely heavy rain in area(s) nearby until Apr. 22, 15:45.CWA 02-23491234</value></parameter><parameter><valueName>CHANNEL</valueName><value>13,130911 14,0</value></parameter><parameter><!--給電視台秀的文字--><valueName>TVtext</valueName><value>大雷雨即時訊息04/22 14:52花蓮縣,請慎防劇烈降雨、雷擊，溪(河)水暴漲，坍方、落石、土石流，以及低能見度</value></parameter><parameter><!--有影響到的縣市--><valueName>counties</valueName><value>花蓮縣</value></parameter><parameter><!--有影響到的鄉鎮--><valueName>townships</valueName><value>花蓮縣秀林鄉</value></parameter><parameter>
+      <!--NCDR要求的介接參數-->
+      <valueName>alert_title</valueName>
+      <value>雷雨即時訊息</value>
+    </parameter>
+    <parameter>
+      <!--NCDR要求的介接參數-->
+      <valueName>alert_color</valueName>
+      <value>橙色</value>
+    </parameter>
+    <parameter>
+      <!--Google crisis map 跟 public alert要用的參數-->
+      <valueName>website_color</valueName>
+      <value>255,128,0</value>
+    </parameter>
+    
+    <area>
+      <areaDesc>花蓮縣秀林鄉</areaDesc>
+      <polygon>24.28,121.77 24.28,121.76 24.28,121.74 24.21,121.67 24.22,121.66 24.26,121.68 24.31,121.75 24.30,121.76 24.28,121.77</polygon>
+    </area>
+    
+  </info>
+</alert>

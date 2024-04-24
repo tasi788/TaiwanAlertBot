@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>cwa.gov.tw_thunderstorm_20240424061739_000</identifier>
+  <sender>weather@cwa.gov.tw</sender>
+  <sent>2024-04-24T06:17:39+08:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <info>
+    <language>zh-TW</language>
+    <category>Met</category>
+    <event>雷雨</event>
+    <responseType>Shelter</responseType>
+    <urgency>Expected</urgency>
+    <severity>Severe</severity>
+    <certainty>Observed</certainty>
+    <eventCode>
+      <!--NCDR要求的介接參數-->
+      <valueName>profile:CAP-TWP:Event:1.0</valueName>
+      <value>thunderstorm</value>
+    </eventCode>
+    <effective>2024-04-24T06:16:00+08:00</effective>
+    <onset>2024-04-24T06:16:00+08:00</onset>
+    <expires>2024-04-24T08:15:00+08:00</expires>
+    <senderName>中央氣象署</senderName>
+    <headline>雷雨即時訊息</headline>
+    <description>113 年 4 月 24 日 6 時 16 分 氣象署發布大雷雨即時訊息，持續時間至 8 時 15 分；請慎防劇烈降雨、雷擊，低窪地區慎防淹水，以及低能見度</description>
+    <instruction>路面濕滑，步行與開車請注意安全。 能見度低，請注意行車安全、減速慢行。 切勿在河流、溪澗或低窪地區逗留。 (顯著對流系統或午後雷陣雨影響時)易有雷電發生影響飛機起降，請留意最新航班資訊。</instruction>
+    
+    <parameter><valueName>CMAMtext</valueName><value>[大雷雨即時訊息]您所在區域附近有劇烈雷雨或降雨發生，請注意防範，持續至04/24 08:15，氣象署Watch out for extremely heavy rain in area(s) nearby until Apr. 24, 08:15.CWA 02-23491234</value></parameter><parameter><valueName>CHANNEL</valueName><value>14,0</value></parameter><parameter><!--給電視台秀的文字--><valueName>TVtext</valueName><value>大雷雨即時訊息04/24 06:16臺中市,苗栗縣,彰化縣,請慎防劇烈降雨、雷擊，低窪地區慎防淹水，以及低能見度</value></parameter><parameter><!--有影響到的縣市--><valueName>counties</valueName><value>臺中市,苗栗縣,彰化縣</value></parameter><parameter><!--有影響到的鄉鎮--><valueName>townships</valueName><value>臺中市西區 臺中市南區 臺中市北區 臺中市西屯區 臺中市南屯區 臺中市北屯區 苗栗縣苗栗市 苗栗縣苑裡鎮 苗栗縣通霄鎮 苗栗縣公館鄉 苗栗縣銅鑼鄉 苗栗縣三義鄉 苗栗縣西湖鄉 苗栗縣大湖鄉 苗栗縣卓蘭鎮 苗栗縣獅潭鄉 苗栗縣泰安鄉 臺中市豐原區 臺中市東勢區 臺中市大甲區 臺中市清水區 臺中市沙鹿區 臺中市梧棲區 臺中市神岡區 臺中市后里區 臺中市大雅區 臺中市潭子區 臺中市新社區 臺中市石岡區 臺中市外埔區 臺中市大安區 臺中市烏日區 臺中市大肚區 臺中市龍井區 臺中市和平區 彰化縣彰化市 彰化縣鹿港鎮 彰化縣和美鎮 彰化縣溪湖鎮 彰化縣二林鎮 彰化縣線西鄉 彰化縣伸港鄉 彰化縣福興鄉 彰化縣秀水鄉 彰化縣花壇鄉 彰化縣大村鄉 彰化縣埔鹽鄉 彰化縣埔心鄉 彰化縣田尾鄉 彰化縣埤頭鄉 彰化縣芳苑鄉 彰化縣竹塘鄉</value></parameter><parameter>
+      <!--NCDR要求的介接參數-->
+      <valueName>alert_title</valueName>
+      <value>雷雨即時訊息</value>
+    </parameter>
+    <parameter>
+      <!--NCDR要求的介接參數-->
+      <valueName>alert_color</valueName>
+      <value>橙色</value>
+    </parameter>
+    <parameter>
+      <!--Google crisis map 跟 public alert要用的參數-->
+      <valueName>website_color</valueName>
+      <value>255,128,0</value>
+    </parameter>
+    
+    <area>
+      <areaDesc>臺中市(西區 南區 北區等共24鄉鎮區),苗栗縣(苗栗市 苑裡鎮 通霄鎮等共11鄉鎮區),彰化縣(彰化市 鹿港鎮 和美鎮等共17鄉鎮區)</areaDesc>
+      <polygon>24.54,120.87 24.40,121.11 24.20,120.96 24.19,120.72 23.88,120.45 23.91,120.29 24.04,120.36 24.05,120.35 24.16,120.42 24.19,120.47 24.26,120.49 24.56,120.67 24.54,120.87</polygon>
+    </area>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </info>
+</alert>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+    
+    <identifier>CWA-Weather_dense-fog_202404230050001</identifier>
+    <sender>weather@cwa.gov.tw</sender>
+    <sent>2024-04-23T00:59:37+08:00</sent>
+    <status>Actual</status>
+    <msgType>Alert</msgType>
+    <scope>Public</scope>
+    
+    <info>
+        <language>zh-TW</language>
+        <category>Met</category>
+        <event>濃霧</event>
+        <responseType>Monitor</responseType>
+        <urgency>Future</urgency>
+        <severity>Moderate</severity>
+        <certainty>Observed</certainty>
+        <eventCode>
+            <valueName>profile:CAP-TWP:Event:1.0</valueName>
+            <value>denseFog</value>
+        </eventCode>
+        <effective>2024-04-23T00:50:00+08:00</effective>
+        <onset>2024-04-23T00:53:00+08:00</onset>
+        <expires>2024-04-23T05:00:00+08:00</expires>
+        <senderName>中央氣象署</senderName>
+        <headline>濃霧特報</headline>
+        <description>
+今（２３日）晨金門及馬祖易有低雲或局部霧影響能見度，馬祖已出現能見度不足２００公尺的現象，金門能見度亦較低，請注意。
+        </description>
+        <web>https://www.cwa.gov.tw/V8/C/P/Warning/FIFOWS.html</web>
+        <parameter>
+            <valueName>alert_title</valueName>
+            <value>濃霧特報</value>
+        </parameter>
+        
+        <parameter>
+            <valueName>alert_color</valueName>
+            <value>黃色</value>
+        </parameter>
+        <parameter>
+            <valueName>website_color</valueName>
+            <value>255,255,0</value>
+        </parameter>
+        
+  
+        <area>
+            <areaDesc>連江縣</areaDesc>
+            <geocode>
+                <valueName>Taiwan_Geocode_103</valueName>
+                <value>09007</value>
+            </geocode>
+        </area>
+
+    </info>
+
+</alert>

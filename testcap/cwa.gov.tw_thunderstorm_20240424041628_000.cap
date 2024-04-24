@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<alert xmlns="urn:oasis:names:tc:emergency:cap:1.2">
+  <identifier>cwa.gov.tw_thunderstorm_20240424041628_000</identifier>
+  <sender>weather@cwa.gov.tw</sender>
+  <sent>2024-04-24T04:16:28+08:00</sent>
+  <status>Actual</status>
+  <msgType>Alert</msgType>
+  <scope>Public</scope>
+  <info>
+    <language>zh-TW</language>
+    <category>Met</category>
+    <event>雷雨</event>
+    <responseType>Shelter</responseType>
+    <urgency>Expected</urgency>
+    <severity>Severe</severity>
+    <certainty>Observed</certainty>
+    <eventCode>
+      <!--NCDR要求的介接參數-->
+      <valueName>profile:CAP-TWP:Event:1.0</valueName>
+      <value>thunderstorm</value>
+    </eventCode>
+    <effective>2024-04-24T04:15:00+08:00</effective>
+    <onset>2024-04-24T04:15:00+08:00</onset>
+    <expires>2024-04-24T05:45:00+08:00</expires>
+    <senderName>中央氣象署</senderName>
+    <headline>雷雨即時訊息</headline>
+    <description>113 年 4 月 24 日 4 時 15 分 氣象署發布大雷雨即時訊息，持續時間至 5 時 45 分；請慎防劇烈降雨、雷擊、9級以上強陣風，溪(河)水暴漲，坍方、落石、土石流，低窪地區慎防淹水，以及低能見度</description>
+    <instruction/>
+    
+    <parameter><valueName>CMAMtext</valueName><value>[大雷雨即時訊息]您所在區域附近有劇烈雷雨或降雨發生，請注意防範，持續至04/24 05:45，氣象署Watch out for extremely heavy rain in area(s) nearby until Apr. 24, 05:45.CWA 02-23491234</value></parameter><parameter><valueName>CHANNEL</valueName><value>14,0</value></parameter><parameter><!--給電視台秀的文字--><valueName>TVtext</valueName><value>大雷雨即時訊息04/24 04:15新竹縣,苗栗縣,新竹市,請慎防劇烈降雨、雷擊、9級以上強陣風，溪(河)水暴漲，坍方、落石、土石流，低窪地區慎防淹水，以及低能見度</value></parameter><parameter><!--有影響到的縣市--><valueName>counties</valueName><value>新竹縣,苗栗縣,新竹市</value></parameter><parameter><!--有影響到的鄉鎮--><valueName>townships</valueName><value>新竹縣寶山鄉 苗栗縣苗栗市 苗栗縣通霄鎮 苗栗縣銅鑼鄉 苗栗縣西湖鄉 苗栗縣頭屋鄉 苗栗縣竹南鎮 苗栗縣頭份市 苗栗縣造橋鄉 苗栗縣後龍鎮 新竹市東區 新竹市香山區 新竹市北區</value></parameter><parameter>
+      <!--NCDR要求的介接參數-->
+      <valueName>alert_title</valueName>
+      <value>雷雨即時訊息</value>
+    </parameter>
+    <parameter>
+      <!--NCDR要求的介接參數-->
+      <valueName>alert_color</valueName>
+      <value>橙色</value>
+    </parameter>
+    <parameter>
+      <!--Google crisis map 跟 public alert要用的參數-->
+      <valueName>website_color</valueName>
+      <value>255,128,0</value>
+    </parameter>
+    
+    <area>
+      <areaDesc>新竹縣(寶山鄉),苗栗縣(苗栗市 通霄鎮 銅鑼鄉等共9鄉鎮區),新竹市(東區 香山區 北區)</areaDesc>
+      <polygon>24.77,121.01 24.45,120.75 24.50,120.64 24.60,120.69 24.69,120.79 24.71,120.84 24.81,120.88 24.82,120.90 24.85,120.90 24.77,121.01</polygon>
+    </area>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </info>
+</alert>
