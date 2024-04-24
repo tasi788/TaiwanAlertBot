@@ -17,9 +17,9 @@ export async function earthquake(report: AlertRoot): Promise<GeneratorText> {
 
     let img = [
         info.resource.map((r) => r.resourceDesc === '地震報告圖' ? r.uri : '').join(''),
-        info.resource.map((r) => r.resourceDesc === '等震度圖' ? r.uri : '').join('')
+        info.resource.map((r) => r.resourceDesc === '等震度圖' ? r.uri : '').join('') + '?ts=' + String(Date.now())
     ]
-    
+
     return new GeneratorText(text, img);
 }
 
