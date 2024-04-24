@@ -3,6 +3,8 @@ import asyncio
 import json
 import pathlib
 from yarl import URL
+import xml.etree.ElementTree as ET
+from xml.etree.ElementTree import ParseError
 
 
 class NCDR:
@@ -21,7 +23,7 @@ class NCDR:
                     "LiveCategory": "all",
                     "IssueID": f"{issue_id}",
                     "AlertTypeID": "all",
-                    "AlertDate": "2024-01-01",
+                    "AlertDate": "2024-04-17",
                     "ddlSentdate": "1",
                     "CountyID": "all",
                     "CountyName": "all",
@@ -33,14 +35,19 @@ class NCDR:
                 }
             )
         }
-        # print(data)
+        
         response = await self.client.post(self.url, headers=self.headers, json=data)
         row = json.loads(response.json()["d"])
+
         for i in row:
             url = URL(i["FilePath"])
+            filename = url.parts[-1]
 
             r = await self.client.get(url.__str__())
-            filename = url.parts[-1]
+            if not r.text.startswith('<?xml'):
+                print("bad xml...", filename)
+                continue
+
             print("writing file...", filename)
             self.path.joinpath(filename).write_bytes(r.content)
 
