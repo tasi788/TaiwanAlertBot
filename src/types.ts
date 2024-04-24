@@ -30,16 +30,17 @@ export interface Info {
     description:  string;
     web:          string;
     parameter:    EventCode[];
+    resource:    Resource[];
     area:         Area[];
 }
 
 export interface Area {
     areaDesc: string;
-    geocode:  EventCode;
+    geocode?: EventCode[] | EventCode;
 }
 
 export interface EventCode {
-    valueName: ValueName;
+    valueName: ValueName | string;
     value:     string;
 }
 
@@ -50,4 +51,23 @@ export enum ValueName {
     SeverityLevel = "severity_level",
     TaiwanGeocode103 = "Taiwan_Geocode_103",
     WebsiteColor = "website_color",
+}
+
+export interface Resource {
+    resourceDesc: string;
+    mimeType:     string;
+    uri:          string;
+}
+
+
+export interface GeneratorText {
+    text: string;
+    image: string[];
+}
+
+export class GeneratorText implements GeneratorText {
+    constructor(text: string, image: string[]) {
+        this.text = text;
+        this.image = image;
+    }
 }

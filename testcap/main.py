@@ -23,21 +23,26 @@ class NCDR:
                     "LiveCategory": "all",
                     "IssueID": f"{issue_id}",
                     "AlertTypeID": "all",
-                    "AlertDate": "2024-04-17",
+                    "AlertDate": "2024-04-10",
                     "ddlSentdate": "1",
                     "CountyID": "all",
                     "CountyName": "all",
                     "TownName": "all",
                     "Sort": None,
-                    "Days": "30",
+                    "Days": "7",
                     "PageCount": 10,
                     "PageIndex": 1,
                 }
             )
         }
-        
+
         response = await self.client.post(self.url, headers=self.headers, json=data)
-        row = json.loads(response.json()["d"])
+        try:
+            row = json.loads(response.json()["d"])
+        except json.JSONDecodeError:
+            print("json decode error...")
+            print(response.text)
+            return
 
         for i in row:
             url = URL(i["FilePath"])

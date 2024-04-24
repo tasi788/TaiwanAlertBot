@@ -3,6 +3,7 @@ import { AlertRoot } from './types';
 
 import { Telegram } from './telegram';
 import { ExecutionContext } from '@cloudflare/workers-types/experimental';
+import { earthquake } from './generator/earthquake';
 
 export interface Env {
 	BOTTOKEN: string;
@@ -36,15 +37,19 @@ export default {
 				"Geo": 1439,
 			},
 			"event": {
-				"降雨": 123
+				"地震": 678
 			}
-			
 		}
-		let text = `發布單位：#${report.alert.info.senderName}\n` +
-				   `警報活動：#${report.alert.info.event}\n` +
-				   `警報顏色：還沒寫\n` +
-				   `警報標題：${report.alert.info.headline}\n` +
-				   `警報描述：${report.alert.info.description}\n`
+		let text = "";
+		switch (report.alert.info.event) {
+			case '地震':
+				let context = await earthquake(report)
+				await bot.sendMediaGroup(env.CHATID, context.image, context.text, 678)
+				
+			default:
+				break;
+		}
+		
 
 		// await bot.sendMessage(env.CHATID, text, 1);
 	},
