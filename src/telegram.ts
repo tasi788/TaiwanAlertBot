@@ -27,11 +27,11 @@ export class Telegram implements TelegramMethods {
         this.url += token;
     }
     
-    async copyMessages(chat_id: number, from_chat_id: number, message_id: number, topic: number): Promise<void> {
+    async copyMessages(chat_id: number, from_chat_id: number, message_ids: number[], topic: number): Promise<void> {
         const data = JSON.stringify({
             chat_id: chat_id,
             from_chat_id: from_chat_id,
-            message_ids: [message_id, message_id + 1],
+            message_ids: message_ids,
             message_thread_id: topic
         });
         let r = await fetch(this.url + '/copyMessages', {
@@ -41,19 +41,34 @@ export class Telegram implements TelegramMethods {
         let resp = await r.json() as TelegramResonse
     }
 
+    async copyMessage(chat_id: number, from_chat_id: number, message_id: number, topic: number): Promise<void> {
+        const data = JSON.stringify({
+            chat_id: chat_id,
+            from_chat_id: from_chat_id,
+            message_id: message_id,
+            message_thread_id: topic
+        });
+        let r = await fetch(this.url + '/copyMessages', {
+            ...this.payload,
+            body: data
+        })
+        let resp = await r.json() as TelegramResonse
+        console.log(resp)
+    }
+
     async sendMessage(chatId: number, text: string, topic: number): Promise<number> {
         // Implementation code for sending a message using this.token
         const data = JSON.stringify({
             chat_id: chatId,
-            text,
-            topic
+            text: text,
+            message_thread_id: topic
         });
         let r = await fetch(this.url + '/sendMessage', {
             ...this.payload,
             body: data
         })
         let resp = await r.json() as TelegramResonse
-        return resp.result[0].message_id
+        return Array.isArray(resp.result) ? resp.result[0].message_id : resp.result.message_id;
     }
 
     async sendMediaGroup(chatId: number, photo: string[], caption: string, topic: number): Promise<number> {
@@ -83,8 +98,7 @@ export class Telegram implements TelegramMethods {
             body: data
         })
         let r = await resp.json() as TelegramResonse
-        console.log(r)
-        return r.result[0].message_id
+        return Array.isArray(r.result) ? r.result[0].message_id : r.result.message_id;
     }
 
     async sendPhoto(chatId: number, photo: string, caption: string): Promise<void> {
@@ -96,10 +110,9 @@ export class Telegram implements TelegramMethods {
         // Implementation code for sending a document using this.token
     }
 }
-
 export interface TelegramResonse {
     ok:     boolean;
-    result: Result[];
+    result: Result[] | Result;
 }
 
 export interface Result {
