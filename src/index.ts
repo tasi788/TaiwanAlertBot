@@ -54,14 +54,14 @@ export default {
 		for (let category in topicList.category) {
 			if (category === report.alert.info.category) {
 				let topic: number = topicList.category[category as keyof typeof topicList.category];
-				await bot.copyMessage(env.CHATID, env.CHATID, msg_id, topic)
+				await bot.copyMessages(env.CHATID, env.CHATID, msg_id, topic)
 			}
 		}
 
 		for (let event in topicList.event) {
 			if (event === report.alert.info.event) {
 				let topic: number = topicList.event[event as keyof typeof topicList.event];
-				await bot.copyMessage(env.CHATID, env.CHATID, msg_id, topic)
+				await bot.copyMessages(env.CHATID, env.CHATID, msg_id, topic)
 			}
 		}
 		

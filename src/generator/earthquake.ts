@@ -16,7 +16,7 @@ export async function earthquake(report: AlertRoot): Promise<GeneratorText> {
         `相關詳細地震資訊請上<a href=\"${info.web}/\">地震測報中心</a>`
 
     let img = [
-        info.resource.map((r) => r.resourceDesc === '地震報告圖' ? r.uri : '').join(''),
+        info.resource.map((r) => r.resourceDesc === '地震報告圖' ? r.uri : '').join('') + '?ts=' + String(Date.now()),
         info.resource.map((r) => r.resourceDesc === '等震度圖' ? r.uri : '').join('') + '?ts=' + String(Date.now())
     ]
 

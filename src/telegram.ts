@@ -27,23 +27,18 @@ export class Telegram implements TelegramMethods {
         this.url += token;
     }
     
-    async copyMessage(chat_id: number, from_chat_id: number, message_id: number, topic: number): Promise<void> {
+    async copyMessages(chat_id: number, from_chat_id: number, message_id: number, topic: number): Promise<void> {
         const data = JSON.stringify({
             chat_id: chat_id,
             from_chat_id: from_chat_id,
-            message_id: message_id,
+            message_ids: [message_id, message_id + 1],
             message_thread_id: topic
         });
-        let r = await fetch(this.url + '/copyMessage', {
+        let r = await fetch(this.url + '/copyMessages', {
             ...this.payload,
             body: data
         })
-        console.log(data)
         let resp = await r.json() as TelegramResonse
-        console.log("==========")
-        console.log(resp)
-        console.log("==========")
-
     }
 
     async sendMessage(chatId: number, text: string, topic: number): Promise<number> {
