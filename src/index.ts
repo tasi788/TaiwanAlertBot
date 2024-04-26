@@ -97,14 +97,14 @@ export default {
 		}
 		
 		//  批次複製訊息
-		// for (let target_topics of topic_copylist) {
-		// 	if (context.image.length > 0) {
-		// 		//  地震圖
-		// 		await bot.copyMessages(env.CHATID, env.CHATID, [msg_id, msg_id + 1], target_topics)
-		// 	}
-		// 	// chat_id: number, from_chat_id: number, message_id: number, topic: number
-		// 	await bot.copyMessage(env.CHATID, env.CHATID, msg_id, target_topics)
-		// }
+		for (let target_topics of topic_copylist) {
+			if (context.image.length > 0) {
+				//  地震圖
+				await bot.copyMessages(env.CHATID, env.CHATID, [msg_id, msg_id + 1], target_topics)
+			}
+			// chat_id: number, from_chat_id: number, message_id: number, topic: number
+			await bot.copyMessage(env.CHATID, env.CHATID, msg_id, target_topics)
+		}
 	},
 
 	async parse(env: Env, context: string): Promise < AlertRoot > {
