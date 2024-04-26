@@ -65,8 +65,9 @@ export default {
 		let text = "";
 		let msg_id = 0;
 		let context: GeneratorText;
+		let info = Array.isArray(report.alert.info) ? report.alert.info[0] : report.alert.info;
 		//  先發到所有警報區 
-		switch (report.alert.info.event) {
+		switch (info.event) {
 			case '地震':
 				context = await earthquake(report)
 				if (debug) {return context}
@@ -80,14 +81,14 @@ export default {
 
 		let topic_copylist: number[] = [];
 		for (let category in topicList.category) {
-			if (category === report.alert.info.category) {
+			if (category === info.category) {
 				let topic: number = topicList.category[category as keyof typeof topicList.category];
 				topic_copylist.push(topic);
 			}
 		}
 
 		for (let event in topicList.event) {
-			if (event === report.alert.info.event) {
+			if (event === info.event) {
 				let topic: number = topicList.event[event as keyof typeof topicList.event];
 				topic_copylist.push(topic);
 			}
