@@ -21,7 +21,7 @@ fn main() {
                     match resp {
                         Ok(r) => {
                             if r.status().is_success() {
-                                // println!("{}", r.text().unwrap());
+                                println!("{}\n=========\n", r.text().unwrap());
                             } else {
                                 println!("Failed: {:?}", path);
                             }
