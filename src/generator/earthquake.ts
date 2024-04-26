@@ -3,7 +3,7 @@ import {
 } from '../types';
 
 export async function earthquake(report: AlertRoot): Promise<GeneratorText> {
-    let info = report.alert.info
+    let info = Array.isArray(report.alert.info) ? report.alert.info[0] : report.alert.info
     let depth = info.parameter.map((p) => p.valueName === 'EventDepth' ? p.value : '').join('').replace("公里", " 公里")
     let magnitude = info.parameter.map((p) => p.valueName === 'EventMagnitudeDescription' ? p.value : '').join('').replace("規模", " 規模")
 

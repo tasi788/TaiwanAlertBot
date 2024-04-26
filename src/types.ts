@@ -9,7 +9,7 @@ export interface Alert {
     status:     string;
     msgType:    string;
     scope:      string;
-    info:       Info;
+    info:       Info[] | Info;
     _xmlns:     string;
 }
 

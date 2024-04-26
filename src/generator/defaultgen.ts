@@ -3,7 +3,7 @@ import {
 } from '../types';
 
 export async function defaultgen(report: AlertRoot): Promise<GeneratorText> {
-    let info = report.alert.info
+    let info = Array.isArray(report.alert.info) ? report.alert.info[0] : report.alert.info
     let color = info.parameter.map((p) => p.valueName === 'alert_color' ? p.value : '').join('')
     if (color === '') {
         color = info.parameter.map((p) => p.valueName === 'alert_title' ? p.value : '').join('')
