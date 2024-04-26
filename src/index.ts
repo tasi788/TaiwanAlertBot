@@ -22,6 +22,7 @@ import {
 export interface Env {
 	BOTTOKEN: string;
 	WEBHOOK_PATH: string;
+	DEBUG_PATH: string,
 	CHATID: number;
 }
 
@@ -33,17 +34,21 @@ export default {
 		const url = new URL(request.url);
 
 		//  擋掉手賤的人
-		if (request.method !== 'POST' || url.pathname != `/${env.WEBHOOK_PATH}`) {
+		if (request.method !== 'POST' || ![`/${env.WEBHOOK_PATH}`, `/${env.DEBUG_PATH}`].includes(url.pathname)) {
 			return new Response(randomKaomoji);
 		}
 
 		const body = await request.text();
 		let report = await this.parse(env, body);
-		await this.broadcast(env, report);
+		
+		let context = await this.broadcast(env, report, url.pathname === `/${env.DEBUG_PATH}`);
+		if (url.pathname === `/${env.DEBUG_PATH}`) {
+			return new Response(context?.text);
+		}
 		return new Response('<?xml version=\"1.0\" encoding=\"utf-8\" ?> <Data><Status>True</Status></Data>');
 	},
 
-	async broadcast(env: Env, report: AlertRoot) {
+	async broadcast(env: Env, report: AlertRoot, debug: boolean = false): Promise < void | GeneratorText >{
 		const bot = new Telegram(env.BOTTOKEN);
 		const gather = 1882;
 		const topicList = {
@@ -64,10 +69,12 @@ export default {
 		switch (report.alert.info.event) {
 			case '地震':
 				context = await earthquake(report)
+				if (debug) {return context}
 				msg_id = await bot.sendMediaGroup(env.CHATID, context.image, context.text, gather)
 
 			default:
 				context = await defaultgen(report)
+				if (debug) {return context}
 				msg_id = await bot.sendMessage(env.CHATID, context.text, gather)
 		}
 
