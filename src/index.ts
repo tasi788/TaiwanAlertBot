@@ -66,12 +66,14 @@ export default {
 		let msg_id = 0;
 		let context: GeneratorText;
 		let info = Array.isArray(report.alert.info) ? report.alert.info[0] : report.alert.info;
+		console.log(info.event)
 		//  先發到所有警報區 
 		switch (info.event) {
 			case '地震':
 				context = await earthquake(report)
 				if (debug) {return context}
 				msg_id = await bot.sendMediaGroup(env.CHATID, context.image, context.text, gather)
+				break;
 
 			default:
 				context = await defaultgen(report)
@@ -95,14 +97,14 @@ export default {
 		}
 		
 		//  批次複製訊息
-		for (let target_topics of topic_copylist) {
-			if (context.image.length > 0) {
-				//  地震圖
-				await bot.copyMessages(env.CHATID, env.CHATID, [msg_id, msg_id + 1], target_topics)
-			}
-			// chat_id: number, from_chat_id: number, message_id: number, topic: number
-			await bot.copyMessage(env.CHATID, env.CHATID, msg_id, target_topics)
-		}
+		// for (let target_topics of topic_copylist) {
+		// 	if (context.image.length > 0) {
+		// 		//  地震圖
+		// 		await bot.copyMessages(env.CHATID, env.CHATID, [msg_id, msg_id + 1], target_topics)
+		// 	}
+		// 	// chat_id: number, from_chat_id: number, message_id: number, topic: number
+		// 	await bot.copyMessage(env.CHATID, env.CHATID, msg_id, target_topics)
+		// }
 	},
 
 	async parse(env: Env, context: string): Promise < AlertRoot > {
