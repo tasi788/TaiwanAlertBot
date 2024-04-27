@@ -56,10 +56,13 @@ export default {
 				"Health": 1423,
 				"Geo": 1439,
 				"Met": 1928,
+				"Infra": 2546
 			},
 			// 獨立 topics
 			"event": {
-				"地震": 678
+				"地震": 678,
+				"市話通訊中斷": 2541,
+				"行動電話中斷": 2541
 			}
 		}
 		let text = "";
@@ -101,9 +104,9 @@ export default {
 			if (context.image.length > 0) {
 				//  地震圖
 				await bot.copyMessages(env.CHATID, env.CHATID, [msg_id, msg_id + 1], target_topics)
+			} else {
+				await bot.copyMessages(env.CHATID, env.CHATID, [msg_id], target_topics)
 			}
-			// chat_id: number, from_chat_id: number, message_id: number, topic: number
-			await bot.copyMessage(env.CHATID, env.CHATID, msg_id, target_topics)
 		}
 	},
 
