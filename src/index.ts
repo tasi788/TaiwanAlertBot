@@ -1,6 +1,7 @@
 import {
 	XMLParser
 } from 'fast-xml-parser';
+import he from 'he';
 import {
 	AlertRoot,
 	GeneratorText
@@ -16,6 +17,9 @@ import {
 	earthquake
 } from './generator/earthquake';
 import {
+	typhoon
+} from './generator/typhoon';
+import {
 	defaultgen
 } from './generator/defaultgen';
 
@@ -23,7 +27,7 @@ export interface Env {
 	BOTTOKEN: string;
 	WEBHOOK_PATH: string;
 	DEBUG_PATH: string,
-	CHATID: number;
+		CHATID: number;
 }
 
 
@@ -40,7 +44,7 @@ export default {
 
 		const body = await request.text();
 		let report = await this.parse(env, body);
-		
+
 		let context = await this.broadcast(env, report, url.pathname === `/${env.DEBUG_PATH}`);
 		if (url.pathname === `/${env.DEBUG_PATH}`) {
 			return new Response(context?.text);
@@ -48,7 +52,7 @@ export default {
 		return new Response('<?xml version=\"1.0\" encoding=\"utf-8\" ?> <Data><Status>True</Status></Data>');
 	},
 
-	async broadcast(env: Env, report: AlertRoot, debug: boolean = false): Promise < void | GeneratorText >{
+	async broadcast(env: Env, report: AlertRoot, debug: boolean = false): Promise < void | GeneratorText > {
 		const bot = new Telegram(env.BOTTOKEN);
 		const gather = 1882;
 		const topicList = {
@@ -62,7 +66,8 @@ export default {
 			"event": {
 				"地震": 678,
 				"市話通訊中斷": 2541,
-				"行動電話中斷": 2541
+				"行動電話中斷": 2541,
+				"颱風": 700
 			}
 		}
 		let text = "";
@@ -74,13 +79,25 @@ export default {
 		switch (info.event) {
 			case '地震':
 				context = await earthquake(report)
-				if (debug) {return context}
+				if (debug) {
+					return context
+				}
 				msg_id = await bot.sendMediaGroup(env.CHATID, context.image, context.text, gather)
+				break;
+
+			case '颱風':
+				context = await typhoon(report)
+				if (debug) {
+					return context
+				}
+				msg_id = await bot.sendMessage(env.CHATID, context.text, gather)
 				break;
 
 			default:
 				context = await defaultgen(report)
-				if (debug) {return context}
+				if (debug) {
+					return context
+				}
 				msg_id = await bot.sendMessage(env.CHATID, context.text, gather)
 		}
 
@@ -98,7 +115,7 @@ export default {
 				topic_copylist.push(topic);
 			}
 		}
-		
+
 		//  批次複製訊息
 		for (let target_topics of topic_copylist) {
 			if (context.image.length > 0) {
@@ -112,11 +129,15 @@ export default {
 
 	async parse(env: Env, context: string): Promise < AlertRoot > {
 		const parser = new XMLParser({
+			attributeNamePrefix: "",
+			textNodeName: "text",
+			ignoreAttributes: false,
 			tagValueProcessor: (attrName, val) => {
+				he.decode(val)
 				if (['effective', 'onset', 'expires'].includes(attrName) === true) {
 					return new Date(val);
 				}
-				return val;
+
 			}
 		});
 		return parser.parse(context) as AlertRoot;
