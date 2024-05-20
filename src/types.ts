@@ -1,3 +1,5 @@
+import { DateTime } from 'luxon';
+
 export interface AlertRoot {
     alert: Alert;
 }
@@ -5,7 +7,7 @@ export interface AlertRoot {
 export interface Alert {
     identifier: string;
     sender:     string;
-    sent:       Date;
+    sent:       DateTime;
     status:     string;
     msgType:    string;
     scope:      string;
@@ -22,9 +24,9 @@ export interface Info {
     severity:     string;
     certainty:    string;
     eventCode:    EventCode;
-    effective:    Date;
-    onset:        Date;
-    expires:      Date;
+    effective:    DateTime;
+    onset:        DateTime;
+    expires:      DateTime;
     senderName:   string;
     headline:     string;
     description:  string;

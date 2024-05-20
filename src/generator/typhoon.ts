@@ -2,6 +2,8 @@ import {
     AlertRoot, GeneratorText
 } from '../types';
 
+import { DateTime } from 'luxon';
+
 export async function typhoon(report: AlertRoot): Promise<GeneratorText> {
     let tyinfo = report as unknown as TyphoonAlert;
     let info = tyinfo.alert.info;
@@ -34,7 +36,7 @@ export async function typhoon(report: AlertRoot): Promise<GeneratorText> {
                 text += `🚨 注意事項：\n${section.text}\n`
         }
     });
-    text += `\n警報發布時間：${info.effective.getFullYear()}年 ${(info.effective.getMonth() + 1)}月 ${info.effective.getDate()}日 ${String(info.effective.getHours()).padStart(2, '0')}:${String(info.effective.getMinutes()).padStart(2, '0')}\n`
+    text += `\n警報發布時間：${info.effective.year}年 ${(info.effective.month)}月 ${info.effective.day}日 ${String(info.effective.hour).padStart(2, '0')}:${String(info.effective.minute).padStart(2, '0')}\n`
     return new GeneratorText(text, []);
 }
 
@@ -45,7 +47,7 @@ export interface TyphoonAlert {
 export interface Alert {
     identifier: string;
     sender: string;
-    sent: Date;
+    sent: DateTime;
     status: string;
     msgType: string;
     scope: string;
@@ -63,9 +65,9 @@ export interface Info {
     severity: string;
     certainty: string;
     eventCode: EventCode;
-    effective: Date;
-    onset: Date;
-    expires: Date;
+    effective: DateTime;
+    onset: DateTime;
+    expires: DateTime;
     senderName: string;
     headline: string;
     description: Description;
@@ -109,7 +111,7 @@ export interface TyphoonInfoSection {
 }
 
 export interface Analysis {
-    time: Date;
+    time: DateTime;
     position: string;
     max_winds: Gust;
     gust: Gust;

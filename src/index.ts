@@ -23,6 +23,8 @@ import {
 	defaultgen
 } from './generator/defaultgen';
 
+import { DateTime } from 'luxon';
+
 export interface Env {
 	BOTTOKEN: string;
 	WEBHOOK_PATH: string;
@@ -135,7 +137,8 @@ export default {
 			tagValueProcessor: (attrName, val) => {
 				he.decode(val)
 				if (['effective', 'onset', 'expires'].includes(attrName) === true) {
-					return new Date(val);
+					return DateTime.fromISO(val, { setZone: true})
+					// return new Date(val);
 				}
 
 			}

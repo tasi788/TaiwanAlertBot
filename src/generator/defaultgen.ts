@@ -20,7 +20,7 @@ export async function defaultgen(report: AlertRoot): Promise < GeneratorText > {
         `警報顏色：#${color}\n` +
         `警報標題：${info.headline}\n\n` +
         `警報描述：${info.description}\n\n` +
-        `警報發布時間：${info.effective.getFullYear()}年 ${(info.effective.getMonth() + 1)}月 ${info.effective.getDate()}日 ${String(info.effective.getHours()).padStart(2, '0')}:${String(info.effective.getMinutes()).padStart(2, '0')}\n` +
-        `警報過期時間：${info.expires.getFullYear()}年 ${(info.expires.getMonth() + 1)}月 ${info.expires.getDate()}日 ${String(info.expires.getHours()).padStart(2, '0')}:${String(info.expires.getMinutes()).padStart(2, '0')}\n\n`
+        `警報發布時間：${info.effective.year}年 ${(info.effective.month)}月 ${info.effective.day}日 ${String(info.effective.hour).padStart(2, '0')}:${String(info.effective.minute).padStart(2, '0')}\n` +
+        `警報過期時間：${info.expires.year}年 ${(info.expires.month)}月 ${info.expires.day}日 ${String(info.expires.hour).padStart(2, '0')}:${String(info.expires.minute).padStart(2, '0')}\n\n`
     return new GeneratorText(text, []);
 }
