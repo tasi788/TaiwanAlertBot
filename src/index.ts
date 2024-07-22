@@ -23,6 +23,10 @@ import {
 	defaultgen
 } from './generator/defaultgen';
 
+import {
+	temp
+} from './daily-gif/daily'
+
 import { DateTime } from 'luxon';
 
 export interface Env {
@@ -38,6 +42,10 @@ export default {
 		const kaomojis = ['(๑•́ ₃ •̀๑)', '(´_ゝ`)', '（’へ’）', '(눈‸눈)', '╮(′～‵〞)╭', '｡ﾟヽ(ﾟ´Д`)ﾉﾟ｡', 'L(　；ω；)┘三└(；ω；　)」', 'ヾ(;ﾟ;Д;ﾟ;)ﾉﾞ', '(◓Д◒)✄╰⋃╯'];
 		const randomKaomoji = kaomojis[Math.floor(Math.random() * kaomojis.length)];
 		const url = new URL(request.url);
+		if (request.method === 'GET' && url.pathname === '/daily') {
+			temp()
+			return new Response('OK');
+		}
 
 		//  擋掉手賤的人
 		if (request.method !== 'POST' || ![`/${env.WEBHOOK_PATH}`, `/${env.DEBUG_PATH}`].includes(url.pathname)) {

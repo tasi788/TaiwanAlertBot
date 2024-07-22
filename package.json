@@ -12,6 +12,7 @@
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.1.0",
     "@cloudflare/workers-types": "^4.20240419.0",
+    "@types/gif.js": "^0.2.5",
     "@types/he": "^1.2.3",
     "@types/luxon": "^3.4.2",
     "@types/node-telegram-bot-api": "^0.64.6",
@@ -22,6 +23,7 @@
   },
   "dependencies": {
     "fast-xml-parser": "^4.3.6",
-    "he": "^1.2.0"
+    "he": "^1.2.0",
+    "sharp": "^0.33.4"
   }
 }
