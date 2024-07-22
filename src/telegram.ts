@@ -14,7 +14,7 @@ export interface InputMediaPhoto {
 
 export class Telegram implements TelegramMethods {
     private token: string;
-    private url: string = 'https://api.trashgr.am/bot';
+    private url: string = 'https://api.telegram.org/bot';
     private payload: object = {
         method: 'POST',
         headers: {
