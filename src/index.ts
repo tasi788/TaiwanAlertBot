@@ -24,7 +24,7 @@ import {
 } from './generator/defaultgen';
 
 import {
-	temp
+	temp, makeGIF
 } from './daily-gif/daily'
 
 import { DateTime } from 'luxon';
@@ -43,7 +43,7 @@ export default {
 		const randomKaomoji = kaomojis[Math.floor(Math.random() * kaomojis.length)];
 		const url = new URL(request.url);
 		if (request.method === 'GET' && url.pathname === '/daily') {
-			temp()
+			await makeGIF()
 			return new Response('OK');
 		}
 
@@ -100,7 +100,7 @@ export default {
 				if (debug) {
 					return context
 				}
-				msg_id = await bot.sendMessage(env.CHATID, context.text, gather)
+				msg_id = await bot.sendMessage(env.CHATID, context.text, gather, 'MarkdownV2')
 				break;
 
 			default:

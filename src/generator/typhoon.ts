@@ -3,7 +3,20 @@ import {
 } from '../types';
 
 import { DateTime } from 'luxon';
-import markdownEscape from 'markdown-escape';
+
+function escape(text: string): string {
+    const specialCharacters = ['_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!'];
+    let escapedText = '';
+    for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+        if (specialCharacters.includes(char)) {
+            escapedText += '\\' + char;
+        } else {
+            escapedText += char;
+        }
+    }
+    return escapedText;
+}
 
 export async function typhoon(report: AlertRoot): Promise<GeneratorText> {
     let tyinfo = report as unknown as TyphoonAlert;
@@ -12,18 +25,18 @@ export async function typhoon(report: AlertRoot): Promise<GeneratorText> {
     tyinfo.alert.info.description['typhoon-info'].section.forEach((section: any) => {
         switch (section.title) {
             case "警報報數":
-                text += `報數：第 ${section.text} 報\n`;
+                text += `報數：第 ${escape(section.text)} 報\n`;
                 break;
             case "颱風資訊":
                 text += `命名：（${section.typhoon_name}）${section.cwa_typhoon_name} \\#`;
                 section.analysis.scale.forEach((scale: any) => {
-                    if (scale.lang == "zh-TW") { text += markdownEscape(scale.text)}
+                    if (scale.lang == "zh-TW") { text += escape(scale.text)}
                 });
                 text += "\n"
         }
     });
     tyinfo.alert.info.description.section.forEach((section: any) => {
-        let cleanText = section.text.replace(/\.+/g, '\\.').replace(/\(+/g, '\\(').replace(/\)+/g, '\\)');
+        let cleanText = escape(section.text)
         switch (section.title) {
             case "颱風動態":
                 text += `動態：${cleanText}\n\n`;
@@ -37,12 +50,10 @@ export async function typhoon(report: AlertRoot): Promise<GeneratorText> {
             case "注意事項":
                 text += `>🚨 注意事項：\n`
                 text += `**>${cleanText.slice(0, 15)}\n`
-                text += `>${cleanText.slice(15, -15)}\n`
-                text += `>${cleanText.slice(-15, -1)}||`
+                text += `>${cleanText.slice(15, -1)}||`
         }
     });
     text += `\n\n警報發布時間：${info.effective.year}年 ${(info.effective.month)}月 ${info.effective.day}日 ${String(info.effective.hour).padStart(2, '0')}:${String(info.effective.minute).padStart(2, '0')}\n`
-    
     return new GeneratorText(text, []);
 }
 
