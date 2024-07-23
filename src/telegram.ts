@@ -60,12 +60,18 @@ export class Telegram implements TelegramMethods {
         const data = JSON.stringify({
             chat_id: chatId,
             text: text,
-            message_thread_id: topic
+            message_thread_id: topic,
+            link_preview_options: {
+                is_disabled: true
+            },
+            parse_mode: 'MarkdownV2'
         });
         let r = await fetch(this.url + '/sendMessage', {
             ...this.payload,
             body: data
         })
+        // let raw = await r.json();
+        // console.log(raw);
         let resp = await r.json() as TelegramResonse
         return Array.isArray(resp.result) ? resp.result[0].message_id : resp.result.message_id;
     }
