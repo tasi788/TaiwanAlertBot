@@ -52,27 +52,29 @@ export class Telegram implements TelegramMethods {
             ...this.payload,
             body: data
         })
+        let raw = await r.json();
+        console.log(raw);
         let resp = await r.json() as TelegramResonse
     }
 
-    async sendMessage(chatId: number, text: string, topic: number): Promise<number> {
+    async sendMessage(chatId: number, text: string, topic: number, parse_mode: string = ''): Promise<number> {
         // Implementation code for sending a message using this.token
         const data = JSON.stringify({
             chat_id: chatId,
             text: text,
             message_thread_id: topic,
             link_preview_options: {
-                is_disabled: true
+            is_disabled: true
             },
-            parse_mode: 'MarkdownV2'
+            ...(parse_mode ? { parse_mode: parse_mode } : {})
         });
         let r = await fetch(this.url + '/sendMessage', {
             ...this.payload,
             body: data
         })
-        // let raw = await r.json();
-        // console.log(raw);
-        let resp = await r.json() as TelegramResonse
+        let raw = await r.json();
+        console.log(raw);
+        let resp = raw as TelegramResonse
         return Array.isArray(resp.result) ? resp.result[0].message_id : resp.result.message_id;
     }
 
