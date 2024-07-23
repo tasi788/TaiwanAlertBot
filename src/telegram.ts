@@ -60,7 +60,10 @@ export class Telegram implements TelegramMethods {
         const data = JSON.stringify({
             chat_id: chatId,
             text: text,
-            message_thread_id: topic
+            message_thread_id: topic,
+            link_preview_options: {
+                is_disabled: true
+            }
         });
         let r = await fetch(this.url + '/sendMessage', {
             ...this.payload,
