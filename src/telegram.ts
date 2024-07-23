@@ -70,9 +70,9 @@ export class Telegram implements TelegramMethods {
             ...this.payload,
             body: data
         })
-        let raw = await r.json();
-        console.log(raw);
-        let resp = raw as TelegramResonse
+        // let raw = await r.json();
+        // console.log(raw);
+        let resp = await r.json() as TelegramResonse
         return Array.isArray(resp.result) ? resp.result[0].message_id : resp.result.message_id;
     }
 
