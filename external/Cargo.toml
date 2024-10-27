@@ -4,4 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-reqwest = "0.12.8"
+reqwest = { version = "0.12.8", features = ["blocking", "json"] }
+serde = "1.0.213"
+futures-io = { version = "0.2.0-beta" }
