@@ -2,6 +2,33 @@ use core::option::Option;
 use reqwest::Url;
 use serde::{Deserialize, Serialize};
 use chrono::{Utc};
+use std::path::Path;
+use pickledb::{PickleDb, PickleDbDumpPolicy, SerializationMethod};
+
+
+struct DB {
+    db: PickleDb,
+}
+
+impl DB {
+    fn new() -> Self {
+        let path = Path::new("data.db");
+        if !path.exists() {
+            PickleDb::new(&path, PickleDbDumpPolicy::AutoDump, SerializationMethod::Json);
+        }
+        let db = PickleDb::load(&path, PickleDbDumpPolicy::AutoDump, SerializationMethod::Json).unwrap();
+        DB { db }
+    }
+
+    fn query(&self, q: &str) -> bool {
+        self.db.get::<bool>(q).unwrap_or(false)
+    }
+
+    fn add(&mut self, q: &str) -> bool {
+        self.db.set(q, &true).unwrap();
+        true
+    }
+}
 
 
 struct NCDR {
@@ -17,11 +44,7 @@ impl NCDR {
 
     fn fetch(self) -> Option<Vec<EQList>> {
         //  https://satis.ncdr.nat.gov.tw/eqsms/data/eqlist.txt?_dc=1730189712207&page=1&start=0&limit=25
-        //  1730189712207
-        // 1730191175745
-        //  1730191144
-        //  1730191194813014
-        let binding = Utc::now().timestamp_subsec_millis().to_string();
+        let binding = Utc::now().timestamp_micros().to_string();
         let now = binding.as_str();
         let mut url = self.base_url.clone();
         url.query_pairs_mut()
@@ -63,6 +86,19 @@ pub struct EQList {
 
 fn main() {
     let client = NCDR::new();
-    let f = client.fetch();
-    // https://satis.ncdr.nat.gov.tw/eqsms/data/Eq20241027_1419_P1.png
+    let eqdata = client.fetch();
+
+    let mut db = DB::new();
+
+    // init first time
+    match eqdata {
+        Some(r) => {
+            for i in r {
+                let text = format!("{}-{}", i.name, i.etime);
+                db.add(&text);
+            }
+        }
+        _ => {}
+    }
+    
 }
