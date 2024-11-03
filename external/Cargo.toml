@@ -10,3 +10,4 @@ futures-io = { version = "0.2.0-beta" }
 serde_json = "1.0.132"
 chrono = "0.4.38"
 pickledb = "0.5.1"
+teloxide = "0.13.0"

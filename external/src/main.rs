@@ -4,7 +4,76 @@ use serde::{Deserialize, Serialize};
 use chrono::{Utc};
 use std::path::Path;
 use pickledb::{PickleDb, PickleDbDumpPolicy, SerializationMethod};
+use std::{thread, time, env};
+use serde_json::{json, Value};
 
+struct Bot {
+    token: String,
+    url: Url,
+    client: reqwest::blocking::Client,
+}
+
+impl Bot {
+    fn new(token: String) -> Self {
+        let url = Url::parse(&format!(
+            "https://api.telegram.org/bot{}/",
+            token
+        )).unwrap();
+        Bot {
+            token,
+            url,
+            client: Default::default(),
+        }
+    }
+
+    fn send_message(&mut self, photo: Vec<String>) -> bool {
+        let mut media_group: Vec<Value> = Vec::new();
+
+        for file_path in photo {
+            let url = format!("https://satis.ncdr.nat.gov.tw/eqsms/data/{}", file_path);
+            let image_byte = reqwest::blocking::get(&url).unwrap().bytes().unwrap();
+
+            let media_item = json!({
+                "type": "photo",
+                "media": format!("attach://{}", file_path)
+        });
+            media_group.push(media_item);
+        };
+        println!("media_group: {:?}", media_group);
+        let url = self.url.join("sendMediaGroup").unwrap();
+        let chat_id = "-1002118573662";
+        let thread = vec![678, 1882];
+        let mut request_body = json!({
+            "chat_id": chat_id,
+            "media": media_group
+        });
+        for t in thread {
+            request_body["message_thread_id"] = json!(t);
+            println!("thread: {:?}", request_body);
+            println!("url: {:?}", url);
+            let r = self.client.post(url.clone())
+                .json(&request_body)
+                .send();
+            match r {
+                Ok(r) => {
+                    println!("{}", r.text().unwrap());
+                }
+                Err(_) => {}
+            }
+        }
+        true
+        // let r = self.client.post(url)
+        //     .json(&json!({"chat_id": chat_id, "text": text}))
+        //     .send();
+        // match r {
+        //     Ok(_) => { true }
+        //     Err(e) => {
+        //         println!("{:?}", e);
+        //         false
+        //     }
+        // }
+    }
+}
 
 struct DB {
     db: PickleDb,
@@ -42,7 +111,7 @@ impl NCDR {
         }
     }
 
-    fn fetch(self) -> Option<Vec<EQList>> {
+    fn fetch(&self) -> Option<Vec<EQList>> {
         //  https://satis.ncdr.nat.gov.tw/eqsms/data/eqlist.txt?_dc=1730189712207&page=1&start=0&limit=25
         let binding = Utc::now().timestamp_micros().to_string();
         let now = binding.as_str();
@@ -85,20 +154,45 @@ pub struct EQList {
 }
 
 fn main() {
+    if let Ok(_) = env::var("TOKEN") { } else {
+        panic!("The TOKEN environment variable was not set.");
+    }
+
+    let token = env::var("TOKEN").unwrap();
+
     let client = NCDR::new();
+    let mut bot = Bot::new(token.to_string());
     let eqdata = client.fetch();
 
     let mut db = DB::new();
 
     // init first time
-    match eqdata {
-        Some(r) => {
-            for i in r {
-                let text = format!("{}-{}", i.name, i.etime);
-                db.add(&text);
+    // match eqdata {
+    //     Some(r) => {
+    //         for i in r {
+    //             let text = format!("{}-{}", i.name, i.etime);
+    //             db.add(&text);
+    //         }
+    //     }
+    //     _ => {}
+    // }
+
+
+    loop {
+        let eqdata = client.fetch();
+        match eqdata {
+            Some(r) => {
+                for i in r {
+                    let text = format!("{}-{}", i.name, i.etime);
+                    // println!("{}", text);
+                    if !db.query(&text) {
+                        let _ = bot.send_message(vec![i.file1, i.file3, i.file4]);
+                        // db.add(&text);
+                    }
+                }
             }
+            _ => {}
         }
-        _ => {}
+        thread::sleep(time::Duration::from_secs(60));
     }
-    
 }
