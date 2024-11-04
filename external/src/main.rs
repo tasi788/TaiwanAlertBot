@@ -1,11 +1,11 @@
+use chrono::Utc;
 use core::option::Option;
+use pickledb::{PickleDb, PickleDbDumpPolicy, SerializationMethod};
 use reqwest::Url;
 use serde::{Deserialize, Serialize};
-use chrono::{Utc};
-use std::path::Path;
-use pickledb::{PickleDb, PickleDbDumpPolicy, SerializationMethod};
-use std::{thread, time, env};
 use serde_json::{json, Value};
+use std::path::Path;
+use std::{env, thread, time};
 
 struct Bot {
     token: String,
@@ -15,10 +15,7 @@ struct Bot {
 
 impl Bot {
     fn new(token: String) -> Self {
-        let url = Url::parse(&format!(
-            "https://api.telegram.org/bot{}/",
-            token
-        )).unwrap();
+        let url = Url::parse(&format!("https://api.telegram.org/bot{}/", token)).unwrap();
         Bot {
             token,
             url,
@@ -28,17 +25,39 @@ impl Bot {
 
     fn send_message(&mut self, photo: Vec<String>) -> bool {
         let mut media_group: Vec<Value> = Vec::new();
+        let proxy_url = env::var("proxy_url").unwrap();
 
         for file_path in photo {
             let url = format!("https://satis.ncdr.nat.gov.tw/eqsms/data/{}", file_path);
-            let image_byte = reqwest::blocking::get(&url).unwrap().bytes().unwrap();
-
-            let media_item = json!({
-                "type": "photo",
-                "media": format!("attach://{}", file_path)
-        });
-            media_group.push(media_item);
-        };
+            match reqwest::blocking::get(&url) {
+                Ok(response) => {
+                    // 獲取 Content-Length header
+                    if let Some(size) = response.headers().get("content-length") {
+                        if let Ok(size) = size.to_str().unwrap_or("0").parse::<u64>() {
+                            // 檢查是否超過 9MB (10 * 1024 * 1024 bytes)
+                            if size > 9 * 1024 * 1024 {
+                                let media_item = json!({
+                                    "type": "photo",
+                                    "media": format!("{}/{}",&proxy_url, &url)
+                                });
+                                media_group.push(media_item);
+                                println!("media_group: {:?}", media_group);
+                            } else {
+                                let media_item = json!({
+                                "type": "photo",
+                                "media": &url
+                            });
+                                media_group.push(media_item);
+                            }
+                        }
+                    }
+                }
+                Err(e) => {
+                    println!("無法取得圖片: {}", e);
+                    continue;
+                }
+            };
+        }
         println!("media_group: {:?}", media_group);
         let url = self.url.join("sendMediaGroup").unwrap();
         let chat_id = "-1002118573662";
@@ -49,11 +68,9 @@ impl Bot {
         });
         for t in thread {
             request_body["message_thread_id"] = json!(t);
-            println!("thread: {:?}", request_body);
-            println!("url: {:?}", url);
-            let r = self.client.post(url.clone())
-                .json(&request_body)
-                .send();
+            // println!("thread: {:?}", request_body);
+            // println!("url: {:?}", url);
+            let r = self.client.post(url.clone()).json(&request_body).send();
             match r {
                 Ok(r) => {
                     println!("{}", r.text().unwrap());
@@ -62,16 +79,6 @@ impl Bot {
             }
         }
         true
-        // let r = self.client.post(url)
-        //     .json(&json!({"chat_id": chat_id, "text": text}))
-        //     .send();
-        // match r {
-        //     Ok(_) => { true }
-        //     Err(e) => {
-        //         println!("{:?}", e);
-        //         false
-        //     }
-        // }
     }
 }
 
@@ -83,9 +90,18 @@ impl DB {
     fn new() -> Self {
         let path = Path::new("data.db");
         if !path.exists() {
-            PickleDb::new(&path, PickleDbDumpPolicy::AutoDump, SerializationMethod::Json);
+            PickleDb::new(
+                &path,
+                PickleDbDumpPolicy::AutoDump,
+                SerializationMethod::Json,
+            );
         }
-        let db = PickleDb::load(&path, PickleDbDumpPolicy::AutoDump, SerializationMethod::Json).unwrap();
+        let db = PickleDb::load(
+            &path,
+            PickleDbDumpPolicy::AutoDump,
+            SerializationMethod::Json,
+        )
+        .unwrap();
         DB { db }
     }
 
@@ -98,7 +114,6 @@ impl DB {
         true
     }
 }
-
 
 struct NCDR {
     base_url: Url,
@@ -154,8 +169,11 @@ pub struct EQList {
 }
 
 fn main() {
-    if let Ok(_) = env::var("TOKEN") { } else {
-        panic!("The TOKEN environment variable was not set.");
+    if env::var("TOKEN").unwrap_or("".to_string()) == "" {
+        panic!("The TOKEN must not be empty");
+    }
+    if env::var("proxy_url").unwrap_or("".to_string()) == "" {
+        panic!("The proxy URL must not be empty");
     }
 
     let token = env::var("TOKEN").unwrap();
@@ -177,7 +195,6 @@ fn main() {
     //     _ => {}
     // }
 
-
     loop {
         let eqdata = client.fetch();
         match eqdata {
@@ -186,7 +203,7 @@ fn main() {
                     let text = format!("{}-{}", i.name, i.etime);
                     // println!("{}", text);
                     if !db.query(&text) {
-                        let _ = bot.send_message(vec![i.file1, i.file3, i.file4]);
+                        let _ = bot.send_message(vec![i.file3, i.file6]);
                         // db.add(&text);
                     }
                 }
