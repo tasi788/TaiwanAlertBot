@@ -6,6 +6,8 @@ use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::path::Path;
 use std::{env, thread, time};
+use scraper::{Html, Selector};
+use regex::Regex;
 
 struct Bot {
     token: String,
@@ -23,51 +25,31 @@ impl Bot {
         }
     }
 
-    fn send_message(&mut self, photo: Vec<String>) -> bool {
+    fn send_message(&mut self, photo: Vec<String>, caption: &str) -> bool {
         let mut media_group: Vec<Value> = Vec::new();
         let proxy_url = env::var("proxy_url").unwrap();
-
-        for file_path in photo {
-            let url = format!("https://satis.ncdr.nat.gov.tw/eqsms/data/{}", file_path);
-            match reqwest::blocking::get(&url) {
-                Ok(response) => {
-                    // 獲取 Content-Length header
-                    if let Some(size) = response.headers().get("content-length") {
-                        if let Ok(size) = size.to_str().unwrap_or("0").parse::<u64>() {
-                            // 檢查是否超過 9MB (10 * 1024 * 1024 bytes)
-                            if size > 9 * 1024 * 1024 {
-                                let media_item = json!({
-                                    "type": "photo",
-                                    "media": format!("{}/{}",&proxy_url, &url)
-                                });
-                                media_group.push(media_item);
-                                println!("media_group: {:?}", media_group);
-                            } else {
-                                let media_item = json!({
-                                "type": "photo",
-                                "media": &url
-                            });
-                                media_group.push(media_item);
-                            }
-                        }
-                    }
-                }
-                Err(e) => {
-                    println!("無法取得圖片: {}", e);
-                    continue;
-                }
-            };
+        println!("caption: {}", caption);
+        for url in photo {
+            let media_item = json!({
+                "type": "photo",
+                "media": &url
+            });
+            media_group.push(media_item);
         }
+
+        media_group[0]["caption"] = caption.into();
+        media_group[0]["parse_mode"] = "Markdown".into();
         println!("media_group: {:?}", media_group);
+        // thread::sleep(time::Duration::from_secs(500));
         let url = self.url.join("sendMediaGroup").unwrap();
         let chat_id = "-1002118573662";
-        let thread = vec![678, 1882];
+        let thread = vec![1]; // vec![678, 1882];
         let mut request_body = json!({
             "chat_id": chat_id,
             "media": media_group
         });
         for t in thread {
-            request_body["message_thread_id"] = json!(t);
+            // request_body["message_thread_id"] = json!(t);
             // println!("thread: {:?}", request_body);
             // println!("url: {:?}", url);
             let r = self.client.post(url.clone()).json(&request_body).send();
@@ -80,6 +62,16 @@ impl Bot {
         }
         true
     }
+}
+
+#[derive(Debug)]
+struct NCREERecord {
+    timestamp: String,
+    eq_no: String,
+    datetime: String,
+    detail: String,
+    depth: String,
+    magnitude: String,
 }
 
 struct DB {
@@ -150,6 +142,50 @@ impl NCDR {
             }
         }
     }
+
+    fn fetch_ncree(&self) -> Option<Vec<NCREERecord>> {
+        let url = Url::parse("https://seaport.ncree.org/eq_data/LOG/total_event.csv").unwrap();
+        match reqwest::blocking::get(url.as_str()) {
+            Ok(r) => {
+                let data = r.text().unwrap();
+
+                let mut reader = csv::ReaderBuilder::new()
+                    .delimiter(b',')
+                    .has_headers(false)
+                    .flexible(true)
+                    .from_reader(data.as_bytes());
+                let records: Vec<NCREERecord> = reader
+                    .records()
+                    .filter_map(|record| {
+                        record.ok().map(|r| NCREERecord {
+                            timestamp: r.get(0).unwrap_or("").to_string(),
+                            eq_no: r.get(1).unwrap_or("").to_string(),
+                            datetime: r.get(2).unwrap_or("").to_string(),
+                            detail: r.get(5).unwrap_or("").to_string(),
+                            depth: r.get(4).unwrap_or("").to_string(),
+                            magnitude: r.get(3).unwrap_or("").to_string(),
+                        })
+                    })
+                    .collect();
+
+                Some(records)
+                // Some(reader.records())
+            }
+            Err(_) => { None }
+        }
+    }
+
+    fn fetch_waveform(&self, db: DB)  {
+        // let ncree = self.fetch_ncree();
+        // match ncree {
+        //     Ok(r) => {
+        //         for i in r {
+        //             db.query(i)
+        //         }
+        //     }
+            // _ => { None }
+
+    }
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -179,9 +215,10 @@ fn main() {
     let token = env::var("TOKEN").unwrap();
 
     let client = NCDR::new();
-    let mut bot = Bot::new(token.to_string());
-    let eqdata = client.fetch();
 
+
+    let mut bot = Bot::new(token.to_string());
+    // let eqdata = client.fetch();
     let mut db = DB::new();
 
     // init first time
@@ -193,19 +230,115 @@ fn main() {
     //         }
     //     }
     //     _ => {}
+
+    // match client.fetch_ncree() {
+    //     Some(r) => {
+    //         for i in r {
+    //             db.add(i.eq_no.as_str());
+    //             db.add(i.timestamp.as_str());
+    //         }
+    //     }
+    //     _ => {}
     // }
+    println!("Ready to Wait!");
 
     loop {
         let eqdata = client.fetch();
+        let proxy_url = env::var("proxy_url").unwrap();
         match eqdata {
             Some(r) => {
                 for i in r {
                     let text = format!("{}-{}", i.name, i.etime);
-                    // println!("{}", text);
                     if !db.query(&text) {
-                        let _ = bot.send_message(vec![i.file3, i.file6]);
+                        let mut url_list: Vec<String> = vec![];
+                        for c in vec![i.file3, i.file6] {
+                            let url = format!("https://satis.ncdr.nat.gov.tw/eqsms/data/{}", c);
+                            match reqwest::blocking::get(&url) {
+                                Ok(response) => {
+                                    // 獲取 Content-Length header
+                                    if let Some(size) = response.headers().get("content-length") {
+                                        if let Ok(size) = size.to_str().unwrap_or("0").parse::<u64>() {
+                                            // 檢查是否超過 9MB (10 * 1024 * 1024 bytes)
+                                            println!("size: {}", size);
+                                            if size > 5 * 1024 * 1024 {
+                                                url_list.push(format!("{}/x0.5/{}",&proxy_url, &url));
+                                            } else {
+                                                url_list.push(String::from(&url));
+                                            }
+                                        }
+                                    }
+                                }
+                                Err(e) => {
+                                    println!("無法取得圖片: {}", e);
+                                    continue;
+                                }
+                            };
+
+                        }
+                        println!("{}", url_list.join(" "));
+                        let _ = bot.send_message(url_list, "");
                         // db.add(&text);
                     }
+                }
+            }
+            _ => {}
+        }
+
+        match client.fetch_ncree() {
+            Some(r) => {
+                let mut text = String::new();
+                for data in r {
+                    text = format!("地震深度：{}\n", data.depth);
+                    text += format!("地震強度：芮氏 規模{}\n", data.magnitude).as_str();
+                    text += format!("圖表簡述：{}\n", data.detail).as_str();
+                    text += format!("發生時間：{}\n\n", data.datetime).as_str();
+                    text += "圖表資源來自 [國家地震工程研究中心](https://ncree.org/)";
+
+                    let eqno = data.eq_no;
+                    if !db.query(eqno.as_str()) {
+                        // https://seaport.ncree.org/eq_data/ASCII/113489/TSHAKEMAP/TIF/113489_PGA.png
+                        // https://seaport.ncree.org/eq_data/ASCII/113489/TSHAKEMAP/TIF/113489_PGV.png
+                        let url_list = vec![
+                            format!("https://seaport.ncree.org/eq_data/ASCII/{}/TSHAKEMAP/TIF/{}_PGA.png", eqno, eqno),
+                            format!("https://seaport.ncree.org/eq_data/ASCII/{}/TSHAKEMAP/TIF/{}_PGV.png", eqno, eqno),
+                        ];
+                        let _ = bot.send_message(url_list, &text);
+                        db.add(&eqno);
+                    }
+                    if !db.query(data.timestamp.as_str()) {
+                        // https://scweb.cwa.gov.tw/zh-tw/earthquake/details/2024110100181955487
+                        let url = format!("https://scweb.cwa.gov.tw/zh-tw/earthquake/details/{}", data.timestamp);
+                        match reqwest::blocking::get(&url) {
+                            Ok(r) => {
+                                let document = Html::parse_document(&r.text().unwrap());
+                                let style_selector = Selector::parse("style").unwrap();
+                                let pattern = Regex::new(r#"url\(['"]*([^'"\)]+)['"]*\)"#).unwrap();
+                                let mut img_list = vec![];
+                                for style_element in document.select(&style_selector) {
+                                    let style_content = style_element.text().collect::<String>();
+                                    for cap in pattern.captures_iter(&style_content) {
+                                        // https://scweb.cwa.gov.tw/webdata/drawTrace/outcome/2024/2024489/4-FULB.gif
+                                        // => /webdata/drawTrace/outcome/2024/2024487/4-ESL.gif
+
+                                        if let Some(url) = cap.get(1) {
+                                            match Url::parse(format!("https://scweb.cwa.gov.tw/{}", url.as_str()).as_str()) {
+                                                Ok(url) => {
+                                                    img_list.push(url.to_string());
+                                                }
+                                                Err(_) => {
+                                                    println!("地動震波圖網址擷取失敗")
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                let _ = bot.send_message(img_list, &text);
+                                db.add(data.timestamp.as_str());
+                            }
+                            Err(_) => {}
+                        }
+                    }
+
                 }
             }
             _ => {}
