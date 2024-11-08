@@ -27,8 +27,6 @@ impl Bot {
 
     fn send_message(&mut self, photo: Vec<String>, caption: &str) -> bool {
         let mut media_group: Vec<Value> = Vec::new();
-        let proxy_url = env::var("proxy_url").unwrap();
-        println!("caption: {}", caption);
         for url in photo {
             let media_item = json!({
                 "type": "photo",
@@ -40,18 +38,16 @@ impl Bot {
         media_group[0]["caption"] = caption.into();
         media_group[0]["parse_mode"] = "Markdown".into();
         println!("media_group: {:?}", media_group);
-        // thread::sleep(time::Duration::from_secs(500));
         let url = self.url.join("sendMediaGroup").unwrap();
         let chat_id = "-1002118573662";
-        let thread = vec![1]; // vec![678, 1882];
+        let thread = vec![678, 1882];
         let mut request_body = json!({
             "chat_id": chat_id,
             "media": media_group
         });
         for t in thread {
-            // request_body["message_thread_id"] = json!(t);
+            request_body["message_thread_id"] = json!(t);
             // println!("thread: {:?}", request_body);
-            // println!("url: {:?}", url);
             let r = self.client.post(url.clone()).json(&request_body).send();
             match r {
                 Ok(r) => {
@@ -174,18 +170,6 @@ impl NCDR {
             Err(_) => { None }
         }
     }
-
-    fn fetch_waveform(&self, db: DB)  {
-        // let ncree = self.fetch_ncree();
-        // match ncree {
-        //     Ok(r) => {
-        //         for i in r {
-        //             db.query(i)
-        //         }
-        //     }
-            // _ => { None }
-
-    }
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -222,24 +206,25 @@ fn main() {
     let mut db = DB::new();
 
     // init first time
-    // match eqdata {
-    //     Some(r) => {
-    //         for i in r {
-    //             let text = format!("{}-{}", i.name, i.etime);
-    //             db.add(&text);
-    //         }
-    //     }
-    //     _ => {}
+    match client.fetch() {
+        Some(r) => {
+            for i in r {
+                let text = format!("{}-{}", i.name, i.etime);
+                db.add(&text);
+            }
+        }
+        _ => {}
+    }
 
-    // match client.fetch_ncree() {
-    //     Some(r) => {
-    //         for i in r {
-    //             db.add(i.eq_no.as_str());
-    //             db.add(i.timestamp.as_str());
-    //         }
-    //     }
-    //     _ => {}
-    // }
+    match client.fetch_ncree() {
+        Some(r) => {
+            for i in r {
+                db.add(i.eq_no.as_str());
+                db.add(i.timestamp.as_str());
+            }
+        }
+        _ => {}
+    }
     println!("Ready to Wait!");
 
     loop {
@@ -248,14 +233,13 @@ fn main() {
         match eqdata {
             Some(r) => {
                 for i in r {
-                    let text = format!("{}-{}", i.name, i.etime);
-                    if !db.query(&text) {
+                    let keyname = format!("{}-{}", i.name, i.etime);
+                    if !db.query(&keyname) {
                         let mut url_list: Vec<String> = vec![];
                         for c in vec![i.file3, i.file6] {
                             let url = format!("https://satis.ncdr.nat.gov.tw/eqsms/data/{}", c);
                             match reqwest::blocking::get(&url) {
                                 Ok(response) => {
-                                    // 獲取 Content-Length header
                                     if let Some(size) = response.headers().get("content-length") {
                                         if let Ok(size) = size.to_str().unwrap_or("0").parse::<u64>() {
                                             // 檢查是否超過 9MB (10 * 1024 * 1024 bytes)
@@ -273,26 +257,26 @@ fn main() {
                                     continue;
                                 }
                             };
-
                         }
-                        println!("{}", url_list.join(" "));
-                        let _ = bot.send_message(url_list, "");
-                        // db.add(&text);
+                        let mut text = String::new();
+                        text += format!("震央地點：{} {}\n", i.elocation, i.edegree).as_str();
+                        text += format!("時間：{} {}", i.name, i.etime).as_str();
+                        let _ = bot.send_message(url_list, &text);
+                        db.add(&keyname);
                     }
                 }
             }
             _ => {}
         }
-
-        match client.fetch_ncree() {
+        let ncree = client.fetch_ncree();
+        match ncree {
             Some(r) => {
                 let mut text = String::new();
                 for data in r {
-                    text = format!("地震深度：{}\n", data.depth);
+                    text += format!("地震深度：{}\n", data.depth).as_str();
                     text += format!("地震強度：芮氏 規模{}\n", data.magnitude).as_str();
                     text += format!("圖表簡述：{}\n", data.detail).as_str();
                     text += format!("發生時間：{}\n\n", data.datetime).as_str();
-                    text += "圖表資源來自 [國家地震工程研究中心](https://ncree.org/)";
 
                     let eqno = data.eq_no;
                     if !db.query(eqno.as_str()) {
@@ -302,7 +286,8 @@ fn main() {
                             format!("https://seaport.ncree.org/eq_data/ASCII/{}/TSHAKEMAP/TIF/{}_PGA.png", eqno, eqno),
                             format!("https://seaport.ncree.org/eq_data/ASCII/{}/TSHAKEMAP/TIF/{}_PGV.png", eqno, eqno),
                         ];
-                        let _ = bot.send_message(url_list, &text);
+                        let ncree_text = format!("{}\n圖表資源來自 [國家地震工程研究中心](https://ncree.org/)", &text);
+                        let _ = bot.send_message(url_list, &ncree_text);
                         db.add(&eqno);
                     }
                     if !db.query(data.timestamp.as_str()) {
@@ -332,7 +317,8 @@ fn main() {
                                         }
                                     }
                                 }
-                                let _ = bot.send_message(img_list, &text);
+                                let ncree_text = format!("{}\n圖表資源來自 [中央氣象署](https://ncree.org/)", &text);
+                                let _ = bot.send_message(img_list, &ncree_text);
                                 db.add(data.timestamp.as_str());
                             }
                             Err(_) => {}
@@ -343,6 +329,7 @@ fn main() {
             }
             _ => {}
         }
+
         thread::sleep(time::Duration::from_secs(60));
     }
 }
