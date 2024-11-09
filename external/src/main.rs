@@ -40,7 +40,7 @@ impl Bot {
         println!("media_group: {:?}", media_group);
         let url = self.url.join("sendMediaGroup").unwrap();
         let chat_id = "-1002118573662";
-        let thread = vec![678, 1882];
+        let thread = vec![678, 1882, 1439];
         let mut request_body = json!({
             "chat_id": chat_id,
             "media": media_group
