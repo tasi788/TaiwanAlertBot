@@ -1,9 +1,0 @@
-version: "3"
-services:
-  taiwanbot:
-    build: .
-    #restart: unless-stopped
-    volumes:
-      - ./config.cfg:/app/config.cfg
-    ports:
-      - 80:80

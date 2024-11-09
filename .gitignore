@@ -14,3 +14,14 @@ config.txt
 *.cfg
 
 .DS_Store
+
+node_modules/
+
+.dev.vars
+
+.wrangler/
+
+*.cap
+testcap/target/
+
+external/target/
