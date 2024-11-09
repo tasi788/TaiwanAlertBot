@@ -1,13 +1,14 @@
 package main
 
 import (
+	parser "TaiwanAlertBot/parser"
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strings"
+	"os"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/tidwall/gjson"
@@ -38,65 +39,14 @@ func getData(w http.ResponseWriter, req *http.Request) {
 	w.Write([]byte(xmlresp))
 }
 
-func notify(text string, alert Alert, resp []byte) {
-	file, _ := ioutil.ReadFile("config.cfg")
-	token := gjson.Get(string(file), "bot").String()
-	bot, _ := tgbotapi.NewBotAPI(token)
-
-	switch {
-	case alert.Info[0].Event == "颱風":
-		var TyAlert TyAlert
-		xml.Unmarshal(resp, &TyAlert)
-		TyInfo := TyAlert.Info[0].Description[0].TyphoonInfo[0]
-		text += "\n" +
-			"報數：第 " + TyInfo.Section[0].Value + " 報\n" +
-			"命名：" + TyInfo.Section[3].CwbTyphoonName + fmt.Sprintf("（%v） #%v\n", TyInfo.Section[3].TyphoonName, TyInfo.Section[3].Analysis[0].Scale[0].Text) +
-			"動態：" + strings.ReplaceAll(TyAlert.Info[0].Description[0].Section[3].Value, "\n", "") + "\n" +
-			"走向預測：" + strings.ReplaceAll(TyAlert.Info[0].Description[0].Section[2].Value, "\n", "")
-	case alert.Info[0].Event == "停班停課":
-		desc := strings.Split(alert.Info[0].Description, "]")[1]
-		desc = strings.ReplaceAll(desc, "。", "\n")
-		text += "\n" +
-			desc + "\n" +
-			"*備註*\n" +
-			alert.Info[0].Instruction
-
-	default:
-		text += "\n" +
-			"警報描述：" + alert.Info[0].Description
-	}
-
-	text += "\n\n" + "警報發布時間：" + alert.Info[0].Effective.Format("2006年01月02日 15:04")
-
-	ChatIdListTmp := gjson.Get(string(file), alert.Info[0].Event).Array()
-	ChatIdList := []int64{gjson.Get(string(file), "others").Int()}
-
-	for x := range ChatIdListTmp {
-		ChatIdList = append(ChatIdList, ChatIdListTmp[x].Int())
-	}
-
-	for ChatId := range ChatIdList {
-		msg := tgbotapi.NewMessage(ChatIdList[ChatId], text)
-		sent, err := bot.Send(msg)
-		if err != nil {
-			log.Println("========")
-			log.Println(err.Error())
-			log.Println("To:", sent.Chat.ID, "Msg_ID:", sent.MessageID)
-			log.Println("========")
-		} else {
-			log.Println("To:", sent.Chat.ID, "Msg_ID:", sent.MessageID)
-		}
-	}
-}
-
 func process(resp []byte) {
-	var alert Alert
+	var alert parser.Alert
 	xml.Unmarshal(resp, &alert)
-
 	AlertColor := ""
 	for n := range alert.Info[0].Parameter {
 		if alert.Info[0].Parameter[n].ValueName == "alert_color" {
 			AlertColor = Color(alert.Info[0].Parameter[n].Value)
+			break
 		} else {
 			AlertColor = "無顏色"
 		}
@@ -109,6 +59,11 @@ func process(resp []byte) {
 	notify(text, alert, resp)
 }
 
+func redirect(w http.ResponseWriter, req *http.Request) {
+	log.Println(req.Method)
+	http.Redirect(w, req, "https://www.google.com", 301)
+}
+
 func main() {
 	file, _ := ioutil.ReadFile("config.cfg")
 	token := gjson.Get(string(file), "bot").String()
@@ -118,6 +73,13 @@ func main() {
 	}
 	log.Println(bot.Self.UserName)
 
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	log.Println(fmt.Sprintf("http://localhost:%s", port))
 	http.HandleFunc("/post", getData)
-	http.ListenAndServe(":80", nil)
+	http.HandleFunc("/", redirect)
+
+	http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 }
