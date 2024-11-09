@@ -141,6 +141,7 @@ impl NCDR {
 
     fn fetch_ncree(&self) -> Option<Vec<NCREERecord>> {
         let url = Url::parse("https://seaport.ncree.org/eq_data/LOG/total_event.csv").unwrap();
+        println!("Fetching NCREE {:?}", url.as_str());
         match reqwest::blocking::get(url.as_str()) {
             Ok(r) => {
                 let data = r.text().unwrap();
@@ -206,25 +207,25 @@ fn main() {
     let mut db = DB::new();
 
     // init first time
-    match client.fetch() {
-        Some(r) => {
-            for i in r {
-                let text = format!("{}-{}", i.name, i.etime);
-                db.add(&text);
-            }
-        }
-        _ => {}
-    }
-
-    match client.fetch_ncree() {
-        Some(r) => {
-            for i in r {
-                db.add(i.eq_no.as_str());
-                db.add(i.timestamp.as_str());
-            }
-        }
-        _ => {}
-    }
+    // match client.fetch() {
+    //     Some(r) => {
+    //         for i in r {
+    //             let text = format!("{}-{}", i.name, i.etime);
+    //             db.add(&text);
+    //         }
+    //     }
+    //     _ => {}
+    // }
+    //
+    // match client.fetch_ncree() {
+    //     Some(r) => {
+    //         for i in r {
+    //             db.add(i.eq_no.as_str());
+    //             db.add(i.timestamp.as_str());
+    //         }
+    //     }
+    //     _ => {}
+    // }
     println!("Ready to Wait!");
 
     loop {
@@ -261,8 +262,9 @@ fn main() {
                         let mut text = String::new();
                         text += format!("震央地點：{} {}\n", i.elocation, i.edegree).as_str();
                         text += format!("時間：{} {}", i.name, i.etime).as_str();
-                        let _ = bot.send_message(url_list, &text);
-                        db.add(&keyname);
+                        if bot.send_message(url_list, &text) == true {
+                            db.add(&keyname);
+                        }
                     }
                 }
             }
@@ -273,7 +275,7 @@ fn main() {
             Some(r) => {
                 let mut text = String::new();
                 for data in r {
-                    text += format!("地震深度：{}\n", data.depth).as_str();
+                    text = format!("地震深度：{}\n", data.depth);
                     text += format!("地震強度：芮氏 規模{}\n", data.magnitude).as_str();
                     text += format!("圖表簡述：{}\n", data.detail).as_str();
                     text += format!("發生時間：{}\n\n", data.datetime).as_str();
@@ -287,8 +289,9 @@ fn main() {
                             format!("https://seaport.ncree.org/eq_data/ASCII/{}/TSHAKEMAP/TIF/{}_PGV.png", eqno, eqno),
                         ];
                         let ncree_text = format!("{}\n圖表資源來自 [國家地震工程研究中心](https://ncree.org/)", &text);
-                        let _ = bot.send_message(url_list, &ncree_text);
-                        db.add(&eqno);
+                        if bot.send_message(url_list, &ncree_text) == true {
+                            db.add(&eqno);
+                        }
                     }
                     if !db.query(data.timestamp.as_str()) {
                         // https://scweb.cwa.gov.tw/zh-tw/earthquake/details/2024110100181955487
@@ -318,8 +321,9 @@ fn main() {
                                     }
                                 }
                                 let ncree_text = format!("{}\n圖表資源來自 [中央氣象署](https://ncree.org/)", &text);
-                                let _ = bot.send_message(img_list, &ncree_text);
-                                db.add(data.timestamp.as_str());
+                                if bot.send_message(img_list, &ncree_text) == true {
+                                    db.add(data.timestamp.as_str());
+                                }
                             }
                             Err(_) => {}
                         }
