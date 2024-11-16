@@ -264,7 +264,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "external"
+name = "external-enhance"
 version = "0.1.0"
 dependencies = [
  "chrono",
