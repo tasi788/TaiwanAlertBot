@@ -1,64 +1,17 @@
+mod bot;
+mod db;
+
 use chrono::Utc;
 use core::option::Option;
-use pickledb::{PickleDb, PickleDbDumpPolicy, SerializationMethod};
 use reqwest::Url;
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
-use std::path::Path;
 use std::{env, thread, time};
 use scraper::{Html, Selector};
 use regex::Regex;
+use bot::Bot;
+use db::DB;
 
-struct Bot {
-    token: String,
-    url: Url,
-    client: reqwest::blocking::Client,
-}
 
-impl Bot {
-    fn new(token: String) -> Self {
-        let url = Url::parse(&format!("https://api.telegram.org/bot{}/", token)).unwrap();
-        Bot {
-            token,
-            url,
-            client: Default::default(),
-        }
-    }
-
-    fn send_message(&mut self, photo: Vec<String>, caption: &str) -> bool {
-        let mut media_group: Vec<Value> = Vec::new();
-        for url in photo {
-            let media_item = json!({
-                "type": "photo",
-                "media": &url
-            });
-            media_group.push(media_item);
-        }
-
-        media_group[0]["caption"] = caption.into();
-        media_group[0]["parse_mode"] = "Markdown".into();
-        println!("media_group: {:?}", media_group);
-        let url = self.url.join("sendMediaGroup").unwrap();
-        let chat_id = "-1002118573662";
-        let thread = vec![678, 1882, 1439];
-        let mut request_body = json!({
-            "chat_id": chat_id,
-            "media": media_group
-        });
-        for t in thread {
-            request_body["message_thread_id"] = json!(t);
-            // println!("thread: {:?}", request_body);
-            let r = self.client.post(url.clone()).json(&request_body).send();
-            match r {
-                Ok(r) => {
-                    println!("{}", r.text().unwrap());
-                }
-                Err(_) => {}
-            }
-        }
-        true
-    }
-}
 
 #[derive(Debug)]
 struct NCREERecord {
@@ -70,38 +23,7 @@ struct NCREERecord {
     magnitude: String,
 }
 
-struct DB {
-    db: PickleDb,
-}
 
-impl DB {
-    fn new() -> Self {
-        let path = Path::new("data.db");
-        if !path.exists() {
-            PickleDb::new(
-                &path,
-                PickleDbDumpPolicy::AutoDump,
-                SerializationMethod::Json,
-            );
-        }
-        let db = PickleDb::load(
-            &path,
-            PickleDbDumpPolicy::AutoDump,
-            SerializationMethod::Json,
-        )
-        .unwrap();
-        DB { db }
-    }
-
-    fn query(&self, q: &str) -> bool {
-        self.db.get::<bool>(q).unwrap_or(false)
-    }
-
-    fn add(&mut self, q: &str) -> bool {
-        self.db.set(q, &true).unwrap();
-        true
-    }
-}
 
 struct NCDR {
     base_url: Url,
@@ -333,7 +255,6 @@ fn main() {
             }
             _ => {}
         }
-
         thread::sleep(time::Duration::from_secs(60));
     }
 }
