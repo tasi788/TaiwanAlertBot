@@ -45,8 +45,9 @@ impl Bot {
             match r {
                 Ok(r) => {
                     if r.status().is_success() {
-                        println!("{}", r.text().unwrap());
                         result = true
+                    } else {
+                        println!("{}", r.text().unwrap());
                     }
                 }
                 Err(_) => { }
