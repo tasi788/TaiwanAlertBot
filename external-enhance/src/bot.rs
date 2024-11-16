@@ -29,7 +29,7 @@ impl Bot {
 
         media_group[0]["caption"] = caption.into();
         media_group[0]["parse_mode"] = "Markdown".into();
-        println!("media_group: {:?}", media_group);
+        // println!("media_group: {:?}", media_group);
         let url = self.url.join("sendMediaGroup").unwrap();
         let chat_id = "-1002118573662";
         let thread = vec![678, 1882, 1439];
@@ -50,7 +50,7 @@ impl Bot {
                         println!("{}", r.text().unwrap());
                     }
                 }
-                Err(_) => { }
+                Err(_) => {}
             }
         }
         result

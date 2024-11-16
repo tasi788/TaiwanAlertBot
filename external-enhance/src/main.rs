@@ -1,17 +1,16 @@
 mod bot;
 mod db;
 
+use bot::Bot;
 use chrono::Utc;
 use core::option::Option;
+use db::DB;
+use regex::Regex;
 use reqwest::Url;
+use scraper::{Html, Selector};
 use serde::{Deserialize, Serialize};
 use std::{env, thread, time};
-use scraper::{Html, Selector};
-use regex::Regex;
-use bot::Bot;
-use db::DB;
-
-
+use std::fmt::format;
 
 #[derive(Debug)]
 struct NCREERecord {
@@ -22,8 +21,6 @@ struct NCREERecord {
     depth: String,
     magnitude: String,
 }
-
-
 
 struct NCDR {
     base_url: Url,
@@ -63,7 +60,6 @@ impl NCDR {
 
     fn fetch_ncree(&self) -> Option<Vec<NCREERecord>> {
         let url = Url::parse("https://seaport.ncree.org/eq_data/LOG/total_event.csv").unwrap();
-        println!("Fetching NCREE {:?}", url.as_str());
         match reqwest::blocking::get(url.as_str()) {
             Ok(r) => {
                 let data = r.text().unwrap();
@@ -90,7 +86,7 @@ impl NCDR {
                 Some(records)
                 // Some(reader.records())
             }
-            Err(_) => { None }
+            Err(_) => None,
         }
     }
 }
@@ -122,7 +118,6 @@ fn main() {
     let token = env::var("TOKEN").unwrap();
 
     let client = NCDR::new();
-
 
     let mut bot = Bot::new(token.to_string());
     // let eqdata = client.fetch();
@@ -164,13 +159,15 @@ fn main() {
                             match reqwest::blocking::get(&url) {
                                 Ok(response) => {
                                     if let Some(size) = response.headers().get("content-length") {
-                                        if let Ok(size) = size.to_str().unwrap_or("0").parse::<u64>() {
+                                        if let Ok(size) =
+                                            size.to_str().unwrap_or("0").parse::<u64>()
+                                        {
                                             // 檢查是否超過 9MB (10 * 1024 * 1024 bytes)
-                                            println!("size: {}", size);
                                             if size > 5 * 1024 * 1024 {
-                                                url_list.push(format!("{}/x0.3/{}",&proxy_url, &url));
+                                                url_list
+                                                    .push(format!("{}/x0.3/{}", &proxy_url, &url));
                                             } else {
-                                                url_list.push(String::from(&url));
+                                                url_list.push(format!("{}/{}", &proxy_url, &url));
                                             }
                                         }
                                     }
@@ -185,7 +182,6 @@ fn main() {
                         text += format!("震央地點：{} {}\n", i.elocation, i.edegree).as_str();
                         text += format!("時間：{} {}", i.name, i.etime).as_str();
                         if bot.send_message(url_list, &text) == true {
-                            println!("寫入資料 {}", &keyname);
                             db.add(&keyname);
                         }
                     }
@@ -211,7 +207,10 @@ fn main() {
                             format!("https://seaport.ncree.org/eq_data/ASCII/{}/TSHAKEMAP/TIF/{}_PGA.png", eqno, eqno),
                             format!("https://seaport.ncree.org/eq_data/ASCII/{}/TSHAKEMAP/TIF/{}_PGV.png", eqno, eqno),
                         ];
-                        let ncree_text = format!("{}\n圖表資源來自 [國家地震工程研究中心](https://ncree.org/)", &text);
+                        let ncree_text = format!(
+                            "{}\n圖表資源來自 [國家地震工程研究中心](https://ncree.org/)",
+                            &text
+                        );
                         if bot.send_message(url_list, &ncree_text) == true {
                             println!("寫入資料 {}", &eqno);
                             db.add(&eqno);
@@ -219,7 +218,10 @@ fn main() {
                     }
                     if !db.query(data.timestamp.as_str()) {
                         // https://scweb.cwa.gov.tw/zh-tw/earthquake/details/2024110100181955487
-                        let url = format!("https://scweb.cwa.gov.tw/zh-tw/earthquake/details/{}", data.timestamp);
+                        let url = format!(
+                            "https://scweb.cwa.gov.tw/zh-tw/earthquake/details/{}",
+                            data.timestamp
+                        );
                         match reqwest::blocking::get(&url) {
                             Ok(r) => {
                                 let document = Html::parse_document(&r.text().unwrap());
@@ -233,7 +235,13 @@ fn main() {
                                         // => /webdata/drawTrace/outcome/2024/2024487/4-ESL.gif
 
                                         if let Some(url) = cap.get(1) {
-                                            match Url::parse(format!("https://scweb.cwa.gov.tw/{}", url.as_str()).as_str()) {
+                                            match Url::parse(
+                                                format!(
+                                                    "https://scweb.cwa.gov.tw/{}",
+                                                    url.as_str()
+                                                )
+                                                .as_str(),
+                                            ) {
                                                 Ok(url) => {
                                                     img_list.push(url.to_string());
                                                 }
@@ -244,16 +252,18 @@ fn main() {
                                         }
                                     }
                                 }
-                                let ncree_text = format!("{}\n圖表資源來自 [中央氣象署](https://ncree.org/)", &text);
+                                let ncree_text = format!(
+                                    "{}\n圖表資源來自 [中央氣象署](https://ncree.org/)",
+                                    &text
+                                );
                                 if bot.send_message(img_list, &ncree_text) == true {
-                                    println!("寫入資料 {}", data.timestamp.as_str());
+                                    n!("寫入資料 {}", data.timestamp.as_str());
                                     db.add(data.timestamp.as_str());
                                 }
                             }
                             Err(_) => {}
                         }
                     }
-
                 }
             }
             _ => {}

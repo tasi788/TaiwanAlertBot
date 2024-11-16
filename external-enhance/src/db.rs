@@ -1,5 +1,5 @@
-use std::path::Path;
 use pickledb::{PickleDb, PickleDbDumpPolicy, SerializationMethod};
+use std::path::Path;
 
 pub struct DB {
     db: PickleDb,
@@ -20,7 +20,7 @@ impl DB {
             PickleDbDumpPolicy::AutoDump,
             SerializationMethod::Json,
         )
-            .unwrap();
+        .unwrap();
         DB { db }
     }
 
@@ -30,6 +30,7 @@ impl DB {
 
     pub fn add(&mut self, q: &str) -> bool {
         self.db.set(q, &true).unwrap();
+        println!("已寫入 {}", &q);
         true
     }
 }
