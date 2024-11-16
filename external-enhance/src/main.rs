@@ -257,7 +257,6 @@ fn main() {
                                     &text
                                 );
                                 if bot.send_message(img_list, &ncree_text) == true {
-                                    n!("寫入資料 {}", data.timestamp.as_str());
                                     db.add(data.timestamp.as_str());
                                 }
                             }
