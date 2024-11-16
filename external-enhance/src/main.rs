@@ -168,7 +168,7 @@ fn main() {
                                             // 檢查是否超過 9MB (10 * 1024 * 1024 bytes)
                                             println!("size: {}", size);
                                             if size > 5 * 1024 * 1024 {
-                                                url_list.push(format!("{}/x0.5/{}",&proxy_url, &url));
+                                                url_list.push(format!("{}/x0.3/{}",&proxy_url, &url));
                                             } else {
                                                 url_list.push(String::from(&url));
                                             }
