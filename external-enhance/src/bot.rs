@@ -44,8 +44,10 @@ impl Bot {
             let r = self.client.post(url.clone()).json(&request_body).send();
             match r {
                 Ok(r) => {
-                    println!("{}", r.text().unwrap());
-                    result = true
+                    if r.status().is_success() {
+                        println!("{}", r.text().unwrap());
+                        result = true
+                    }
                 }
                 Err(_) => { }
             }

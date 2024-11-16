@@ -185,6 +185,7 @@ fn main() {
                         text += format!("震央地點：{} {}\n", i.elocation, i.edegree).as_str();
                         text += format!("時間：{} {}", i.name, i.etime).as_str();
                         if bot.send_message(url_list, &text) == true {
+                            println!("寫入資料 {}", &keyname);
                             db.add(&keyname);
                         }
                     }
@@ -212,6 +213,7 @@ fn main() {
                         ];
                         let ncree_text = format!("{}\n圖表資源來自 [國家地震工程研究中心](https://ncree.org/)", &text);
                         if bot.send_message(url_list, &ncree_text) == true {
+                            println!("寫入資料 {}", &eqno);
                             db.add(&eqno);
                         }
                     }
@@ -244,6 +246,7 @@ fn main() {
                                 }
                                 let ncree_text = format!("{}\n圖表資源來自 [中央氣象署](https://ncree.org/)", &text);
                                 if bot.send_message(img_list, &ncree_text) == true {
+                                    println!("寫入資料 {}", data.timestamp.as_str());
                                     db.add(data.timestamp.as_str());
                                 }
                             }
