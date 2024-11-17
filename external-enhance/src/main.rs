@@ -1,8 +1,10 @@
 mod bot;
 mod db;
+mod typhoon;
 
 use bot::Bot;
-use chrono::Utc;
+use chrono::{TimeZone, Utc};
+use chrono_tz::Asia::Taipei;
 use core::option::Option;
 use db::DB;
 use regex::Regex;
@@ -10,7 +12,7 @@ use reqwest::Url;
 use scraper::{Html, Selector};
 use serde::{Deserialize, Serialize};
 use std::{env, thread, time};
-use std::fmt::format;
+use typhoon::NCDRTyphoon;
 
 #[derive(Debug)]
 struct NCREERecord {
@@ -118,10 +120,12 @@ fn main() {
     let token = env::var("TOKEN").unwrap();
 
     let client = NCDR::new();
+    let typhoon = NCDRTyphoon::new();
 
     let mut bot = Bot::new(token.to_string());
     // let eqdata = client.fetch();
     let mut db = DB::new();
+    const TYPHOON_THREAD: &[&str] = &["700", "1882"];
 
     // init first time
     // match client.fetch() {
@@ -143,129 +147,167 @@ fn main() {
     //     }
     //     _ => {}
     // }
+    //
+    // match typhoon.fetch() {
+    //     Some(r) => {
+    //         for record in r {
+    //             db.add(&record.id);
+    //         }
+    //     }
+    //     _ => {}
+    // }
     println!("Ready to Wait!");
 
     loop {
         let eqdata = client.fetch();
         let proxy_url = env::var("proxy_url").unwrap();
-        match eqdata {
+        // match eqdata {
+        //     Some(r) => {
+        //         for i in r {
+        //             let keyname = format!("{}-{}", i.name, i.etime);
+        //             if !db.query(&keyname) {
+        //                 let mut url_list: Vec<String> = vec![];
+        //                 for c in vec![i.file3, i.file6] {
+        //                     let url = format!("https://satis.ncdr.nat.gov.tw/eqsms/data/{}", c);
+        //                     match reqwest::blocking::get(&url) {
+        //                         Ok(response) => {
+        //                             if let Some(size) = response.headers().get("content-length") {
+        //                                 if let Ok(size) =
+        //                                     size.to_str().unwrap_or("0").parse::<u64>()
+        //                                 {
+        //                                     // 檢查是否超過 9MB (10 * 1024 * 1024 bytes)
+        //                                     if size > 5 * 1024 * 1024 {
+        //                                         url_list
+        //                                             .push(format!("{}/x0.3/{}", &proxy_url, &url));
+        //                                     } else {
+        //                                         url_list.push(format!("{}/{}", &proxy_url, &url));
+        //                                     }
+        //                                 }
+        //                             }
+        //                         }
+        //                         Err(e) => {
+        //                             println!("無法取得圖片: {}", e);
+        //                             continue;
+        //                         }
+        //                     };
+        //                 }
+        //                 let mut text = String::new();
+        //                 text += format!("震央地點：{} {}\n", i.elocation, i.edegree).as_str();
+        //                 text += format!("時間：{} {}", i.name, i.etime).as_str();
+        //                 if bot.send_message(url_list, &text, "eq") == true {
+        //                     db.add(&keyname);
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     _ => {}
+        // }
+        let ncree = client.fetch_ncree();
+        // match ncree {
+        //     Some(r) => {
+        //         let mut text = String::new();
+        //         for data in r {
+        //             text = format!("地震深度：{}\n", data.depth);
+        //             text += format!("地震強度：芮氏 規模{}\n", data.magnitude).as_str();
+        //             text += format!("圖表簡述：{}\n", data.detail).as_str();
+        //             text += format!("發生時間：{}\n\n", data.datetime).as_str();
+        //
+        //             let eqno = data.eq_no;
+        //             if !db.query(eqno.as_str()) {
+        //                 // https://seaport.ncree.org/eq_data/ASCII/113489/TSHAKEMAP/TIF/113489_PGA.png
+        //                 // https://seaport.ncree.org/eq_data/ASCII/113489/TSHAKEMAP/TIF/113489_PGV.png
+        //                 let url_list = vec![
+        //                     format!("https://seaport.ncree.org/eq_data/ASCII/{}/TSHAKEMAP/TIF/{}_PGA.png", eqno, eqno),
+        //                     format!("https://seaport.ncree.org/eq_data/ASCII/{}/TSHAKEMAP/TIF/{}_PGV.png", eqno, eqno),
+        //                 ];
+        //                 let ncree_text = format!(
+        //                     "{}\n圖表資源來自 [國家地震工程研究中心](https://ncree.org/)",
+        //                     &text
+        //                 );
+        //                 if bot.send_message(url_list, &ncree_text, "eq") == true {
+        //                     println!("寫入資料 {}", &eqno);
+        //                     db.add(&eqno);
+        //                 }
+        //             }
+        //             if !db.query(data.timestamp.as_str()) {
+        //                 // https://scweb.cwa.gov.tw/zh-tw/earthquake/details/2024110100181955487
+        //                 let url = format!(
+        //                     "https://scweb.cwa.gov.tw/zh-tw/earthquake/details/{}",
+        //                     data.timestamp
+        //                 );
+        //                 match reqwest::blocking::get(&url) {
+        //                     Ok(r) => {
+        //                         let document = Html::parse_document(&r.text().unwrap());
+        //                         let style_selector = Selector::parse("style").unwrap();
+        //                         let pattern = Regex::new(r#"url\(['"]*([^'"\)]+)['"]*\)"#).unwrap();
+        //                         let mut img_list = vec![];
+        //                         for style_element in document.select(&style_selector) {
+        //                             let style_content = style_element.text().collect::<String>();
+        //                             for cap in pattern.captures_iter(&style_content) {
+        //                                 // https://scweb.cwa.gov.tw/webdata/drawTrace/outcome/2024/2024489/4-FULB.gif
+        //                                 // => /webdata/drawTrace/outcome/2024/2024487/4-ESL.gif
+        //
+        //                                 if let Some(url) = cap.get(1) {
+        //                                     match Url::parse(
+        //                                         format!(
+        //                                             "https://scweb.cwa.gov.tw/{}",
+        //                                             url.as_str()
+        //                                         )
+        //                                         .as_str(),
+        //                                     ) {
+        //                                         Ok(url) => {
+        //                                             img_list.push(url.to_string());
+        //                                         }
+        //                                         Err(_) => {
+        //                                             println!("地動震波圖網址擷取失敗")
+        //                                         }
+        //                                     }
+        //                                 }
+        //                             }
+        //                         }
+        //                         let ncree_text = format!(
+        //                             "{}\n圖表資源來自 [中央氣象署](https://ncree.org/)",
+        //                             &text
+        //                         );
+        //                         if bot.send_message(img_list, &ncree_text, "eq") == true {
+        //                             db.add(data.timestamp.as_str());
+        //                         }
+        //                     }
+        //                     Err(_) => {}
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     _ => {}
+        // }
+
+        // let typhoon_ = ;
+        // match typhoon.fetch() {
+        //     Some(r) => {
+        //         for data in r {
+        //             if !db.query(&data.id) {
+        //                 // https://watch.ncdr.nat.gov.tw/00_Wxmap/0A3_TYPHOON_MP4/202411/20241116_20.mp4
+        //
+        //                 let now = Taipei.from_utc_datetime(&chrono::Utc::now().naive_utc());
+        //                 let ymd = now.format("%Y%m").to_string();
+        //                 let url = format!("https://watch.ncdr.nat.gov.tw/00_Wxmap/0A3_TYPHOON_MP4/{}/{}", ymd, data.link);
+        //                 let text = format!("{}\n{}", data.name, data.name);
+        //                 if bot.send_video(&url, &text, TYPHOON_THREAD) == true {
+        //                     db.add(&data.id);
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     _ => {}
+        // }
+
+        match typhoon.fetch_2d() {
             Some(r) => {
                 for i in r {
-                    let keyname = format!("{}-{}", i.name, i.etime);
-                    if !db.query(&keyname) {
-                        let mut url_list: Vec<String> = vec![];
-                        for c in vec![i.file3, i.file6] {
-                            let url = format!("https://satis.ncdr.nat.gov.tw/eqsms/data/{}", c);
-                            match reqwest::blocking::get(&url) {
-                                Ok(response) => {
-                                    if let Some(size) = response.headers().get("content-length") {
-                                        if let Ok(size) =
-                                            size.to_str().unwrap_or("0").parse::<u64>()
-                                        {
-                                            // 檢查是否超過 9MB (10 * 1024 * 1024 bytes)
-                                            if size > 5 * 1024 * 1024 {
-                                                url_list
-                                                    .push(format!("{}/x0.3/{}", &proxy_url, &url));
-                                            } else {
-                                                url_list.push(format!("{}/{}", &proxy_url, &url));
-                                            }
-                                        }
-                                    }
-                                }
-                                Err(e) => {
-                                    println!("無法取得圖片: {}", e);
-                                    continue;
-                                }
-                            };
-                        }
-                        let mut text = String::new();
-                        text += format!("震央地點：{} {}\n", i.elocation, i.edegree).as_str();
-                        text += format!("時間：{} {}", i.name, i.etime).as_str();
-                        if bot.send_message(url_list, &text) == true {
-                            db.add(&keyname);
-                        }
-                    }
+                    // i.id;
+                    // if !db.query(i.)
                 }
             }
-            _ => {}
-        }
-        let ncree = client.fetch_ncree();
-        match ncree {
-            Some(r) => {
-                let mut text = String::new();
-                for data in r {
-                    text = format!("地震深度：{}\n", data.depth);
-                    text += format!("地震強度：芮氏 規模{}\n", data.magnitude).as_str();
-                    text += format!("圖表簡述：{}\n", data.detail).as_str();
-                    text += format!("發生時間：{}\n\n", data.datetime).as_str();
-
-                    let eqno = data.eq_no;
-                    if !db.query(eqno.as_str()) {
-                        // https://seaport.ncree.org/eq_data/ASCII/113489/TSHAKEMAP/TIF/113489_PGA.png
-                        // https://seaport.ncree.org/eq_data/ASCII/113489/TSHAKEMAP/TIF/113489_PGV.png
-                        let url_list = vec![
-                            format!("https://seaport.ncree.org/eq_data/ASCII/{}/TSHAKEMAP/TIF/{}_PGA.png", eqno, eqno),
-                            format!("https://seaport.ncree.org/eq_data/ASCII/{}/TSHAKEMAP/TIF/{}_PGV.png", eqno, eqno),
-                        ];
-                        let ncree_text = format!(
-                            "{}\n圖表資源來自 [國家地震工程研究中心](https://ncree.org/)",
-                            &text
-                        );
-                        if bot.send_message(url_list, &ncree_text) == true {
-                            println!("寫入資料 {}", &eqno);
-                            db.add(&eqno);
-                        }
-                    }
-                    if !db.query(data.timestamp.as_str()) {
-                        // https://scweb.cwa.gov.tw/zh-tw/earthquake/details/2024110100181955487
-                        let url = format!(
-                            "https://scweb.cwa.gov.tw/zh-tw/earthquake/details/{}",
-                            data.timestamp
-                        );
-                        match reqwest::blocking::get(&url) {
-                            Ok(r) => {
-                                let document = Html::parse_document(&r.text().unwrap());
-                                let style_selector = Selector::parse("style").unwrap();
-                                let pattern = Regex::new(r#"url\(['"]*([^'"\)]+)['"]*\)"#).unwrap();
-                                let mut img_list = vec![];
-                                for style_element in document.select(&style_selector) {
-                                    let style_content = style_element.text().collect::<String>();
-                                    for cap in pattern.captures_iter(&style_content) {
-                                        // https://scweb.cwa.gov.tw/webdata/drawTrace/outcome/2024/2024489/4-FULB.gif
-                                        // => /webdata/drawTrace/outcome/2024/2024487/4-ESL.gif
-
-                                        if let Some(url) = cap.get(1) {
-                                            match Url::parse(
-                                                format!(
-                                                    "https://scweb.cwa.gov.tw/{}",
-                                                    url.as_str()
-                                                )
-                                                .as_str(),
-                                            ) {
-                                                Ok(url) => {
-                                                    img_list.push(url.to_string());
-                                                }
-                                                Err(_) => {
-                                                    println!("地動震波圖網址擷取失敗")
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                let ncree_text = format!(
-                                    "{}\n圖表資源來自 [中央氣象署](https://ncree.org/)",
-                                    &text
-                                );
-                                if bot.send_message(img_list, &ncree_text) == true {
-                                    db.add(data.timestamp.as_str());
-                                }
-                            }
-                            Err(_) => {}
-                        }
-                    }
-                }
-            }
-            _ => {}
         }
         thread::sleep(time::Duration::from_secs(60));
     }
