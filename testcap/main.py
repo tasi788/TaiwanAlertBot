@@ -1,8 +1,9 @@
 import httpx
+from httpx import URL
 import asyncio
 import json
 import pathlib
-from yarl import URL
+
 import xml.etree.ElementTree as ET
 from xml.etree.ElementTree import ParseError
 
@@ -14,7 +15,7 @@ class NCDR:
             "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
         }
         self.client = httpx.AsyncClient()
-        self.path = pathlib.Path("./")
+        self.path = pathlib.Path("./data")
 
     async def fetch(self, issue_id: str):
         data = {
@@ -23,7 +24,7 @@ class NCDR:
                     "LiveCategory": "all",
                     "IssueID": f"{issue_id}",
                     "AlertTypeID": "all",
-                    "AlertDate": "2024-04-10",
+                    "AlertDate": "2025-08-19",
                     "ddlSentdate": "1",
                     "CountyID": "all",
                     "CountyName": "all",
@@ -46,7 +47,7 @@ class NCDR:
 
         for i in row:
             url = URL(i["FilePath"])
-            filename = url.parts[-1]
+            filename = url.path.split("/")[-1]
 
             r = await self.client.get(url.__str__())
             if not r.text.startswith('<?xml'):
