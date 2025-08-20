@@ -34,6 +34,10 @@ export interface Env {
 
 
 export default {
+	// async scheduled(controller: ScheduledController, env: Env, ctx: ExecutionContext,) {
+	// 	// ctx.waitUntil(doSomeTaskOnASchedule());
+	// },
+	
 	async fetch(request: Request, env: Env, ctx: ExecutionContext) {
 		const kaomojis = ['(๑•́ ₃ •̀๑)', '(´_ゝ`)', '（’へ’）', '(눈‸눈)', '╮(′～‵〞)╭', '｡ﾟヽ(ﾟ´Д`)ﾉﾟ｡', 'L(　；ω；)┘三└(；ω；　)」', 'ヾ(;ﾟ;Д;ﾟ;)ﾉﾞ', '(◓Д◒)✄╰⋃╯'];
 		const randomKaomoji = kaomojis[Math.floor(Math.random() * kaomojis.length)];
@@ -69,7 +73,9 @@ export default {
 				"地震": 678,
 				"市話通訊中斷": 2541,
 				"行動電話中斷": 2541,
-				"颱風": 700
+				"颱風": 700,
+				"停班停課": 686,
+				"空氣品質": 57931
 			}
 		}
 		let text = "";

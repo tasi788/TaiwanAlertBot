@@ -64,7 +64,7 @@ export class Telegram implements TelegramMethods {
             link_preview_options: {
                 is_disabled: true
             },
-            parse_mode: 'MarkdownV2'
+            parse_mode: 'html'
         });
         let r = await fetch(this.url + '/sendMessage', {
             ...this.payload,

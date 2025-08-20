@@ -35,10 +35,11 @@ export async function typhoon(report: AlertRoot): Promise<GeneratorText> {
                 text += `⚠️ 警戒區域及事項：\n${cleanText}\n\n`
                 break;
             case "注意事項":
-                text += `>🚨 注意事項：\n`
-                text += `**>${cleanText.slice(0, 15)}\n`
-                text += `>${cleanText.slice(15, -15)}\n`
-                text += `>${cleanText.slice(-15, -1)}||`
+                text += `<blockquote>🚨 注意事項：</blockquote>\n`
+                text += `<blockquote expandable>${cleanText.slice(0, 15)}\n`
+                text += `${cleanText.slice(15, -15)}\n`
+                text += `${cleanText.slice(-15, -1)}`
+                text += `</blockquote>`
         }
     });
     text += `\n\n警報發布時間：${info.effective.year}年 ${(info.effective.month)}月 ${info.effective.day}日 ${String(info.effective.hour).padStart(2, '0')}:${String(info.effective.minute).padStart(2, '0')}\n`
